@@ -147,35 +147,63 @@ object Form1: TForm1
     TabOrder = 0
     object CategoryPanel2: TCategoryPanel
       Top = 137
-      Caption = 'CategoryPanel2'
+      Caption = #1055#1086#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' - '#1088#1072#1089#1087'.'
       TabOrder = 0
       object Label12: TLabel
         Left = 8
         Top = 8
-        Width = 159
+        Width = 117
         Height = 13
-        Caption = #1055#1086#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' '#1072#1076#1084#1080#1085#1080#1089#1090#1088#1072#1094#1080#1080
+        Cursor = crHandPoint
+        Caption = #1055#1086#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' '#1072#1076#1084
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object Label13: TLabel
         Left = 8
         Top = 27
-        Width = 112
+        Width = 130
         Height = 13
+        Cursor = crHandPoint
         Caption = #1055#1086#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' '#1075#1083#1072#1074#1099
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object Label14: TLabel
         Left = 8
         Top = 46
-        Width = 144
+        Width = 165
         Height = 13
+        Cursor = crHandPoint
         Caption = #1056#1072#1089#1087#1086#1088#1103#1078#1077#1085#1080#1103' '#1087#1086' '#1086#1089#1085'. '#1076#1077#1103#1090'.'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object Label15: TLabel
         Left = 8
         Top = 65
-        Width = 107
+        Width = 126
         Height = 13
+        Cursor = crHandPoint
         Caption = #1056#1072#1089#1087#1086#1088#1103#1078#1077#1085#1080#1103' '#1075#1083#1072#1074#1099
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
     object CategoryPanel1: TCategoryPanel
@@ -186,18 +214,31 @@ object Form1: TForm1
       object Label1: TLabel
         Left = 8
         Top = 8
-        Width = 52
+        Width = 60
         Height = 13
         Cursor = crHandPoint
         Caption = #1042#1093#1086#1076#1103#1097#1080#1077
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         OnClick = Label1Click
       end
       object Label2: TLabel
         Left = 8
         Top = 27
-        Width = 58
+        Width = 67
         Height = 13
+        Cursor = crHandPoint
         Caption = #1048#1089#1093#1086#1076#1103#1097#1080#1077
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         OnClick = Label2Click
       end
     end

@@ -5,6 +5,7 @@
 
 #include "Unit4.h"
 #include "Unit2.h"
+#include <windows.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -117,10 +118,19 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 			  CheckIsp = 0;
 		}
 
+		//ShowMessage(Form2->ADOQuery1->FieldByName("file_name")->Value);
 
-
-		 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"' WHERE number IN ("+ID->Caption+") ";
-		 Form2->ADOQuery1->ExecSQL();
+		if(Form2->ADOQuery1->FieldByName("file_name")->Value == "No_File" || Form2->ADOQuery1->FieldByName("file_name")->Value == "" || Form2->ADOQuery1->FieldByName("file_name")->Value == "Нет файла")
+		{
+			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"',rez ='rez', file =:BlobValue, file_name ='"+FileName->Caption+"' WHERE number IN ("+ID->Caption+") ";
+			 Form2->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
+			 Form2->ADOQuery1->ExecSQL();
+		}
+		else
+		{
+			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"' WHERE number IN ("+ID->Caption+") ";
+			 Form2->ADOQuery1->ExecSQL();
+		}
 
 			Form2->ADOQuery1->Active = false;
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
@@ -184,7 +194,7 @@ void __fastcall TForm4::BitBtn4Click(TObject *Sender)
 void __fastcall TForm4::FileNameClick(TObject *Sender)
 {
 
-	 if(FilePatch->Caption == "-" || FileName->Caption == "Нет файла")
+	 if(FilePatch->Caption == "-" || FileName->Caption == "Нет файла" || FileName->Caption == "No_File")
 	 {
 
 			if(OpenDialog1->Execute())
@@ -200,7 +210,10 @@ void __fastcall TForm4::FileNameClick(TObject *Sender)
 	 else
 	 {
 		((TBlobField*)Form2->ADOQuery1->FieldByName("file"))->SaveToFile(ExtractFilePath(ParamStr(0))+FileName->Caption);
-	   //	ShellExecute(h, "open", "MyFile.txt", NULL, NULL, SW_SHOWNORMAL);
+			char* OpenFileName;
+			AnsiString  f = FileName->Caption;
+			OpenFileName = f.c_str();
+			ShellExecuteA(Handle, "open", OpenFileName, NULL, NULL, SW_SHOWNORMAL);
 
 	 }
 

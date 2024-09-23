@@ -17,8 +17,8 @@ object Form4: TForm4
   PixelsPerInch = 96
   TextHeight = 13
   object ADD_OR_EDIT: TLabel
-    Left = 497
-    Top = 59
+    Left = 392
+    Top = 5
     Width = 71
     Height = 13
     Caption = 'ADD_OR_EDIT'
@@ -169,8 +169,8 @@ object Form4: TForm4
     OnClick = FileNameClick
   end
   object FilePatch: TLabel
-    Left = 392
-    Top = 56
+    Left = 273
+    Top = 59
     Width = 43
     Height = 13
     Caption = 'FilePatch'

@@ -52,6 +52,7 @@ __published:	// IDE-managed Components
 	TComboBox *SearchIsp;
 	TEdit *Edit4;
 	TEdit *SearchSod;
+	TMemo *Memo2;
 	void __fastcall DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect, int DataCol,
           TColumn *Column, TGridDrawState State);
 	void __fastcall RadioButton2Click(TObject *Sender);

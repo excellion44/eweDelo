@@ -213,7 +213,7 @@ object Form2: TForm2
       ParentFont = False
     end
     object Memo1: TMemo
-      Left = 1093
+      Left = 1087
       Top = 18
       Width = 185
       Height = 42
@@ -1294,6 +1294,14 @@ object Form2: TForm2
       TextHint = #1050#1088#1072#1090#1082#1086#1077' '#1089#1086#1076#1077#1088#1078#1072#1085#1080#1077
       OnKeyUp = SearchSodKeyUp
     end
+  end
+  object Memo2: TMemo
+    Left = 808
+    Top = 184
+    Width = 217
+    Height = 241
+    TabOrder = 3
+    Visible = False
   end
   object ADOConnection1: TADOConnection
     ConnectionString = 

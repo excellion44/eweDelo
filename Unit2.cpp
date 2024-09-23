@@ -7,6 +7,8 @@
 #include "Unit4.h"
 #include "Unit5.h"
 #include <DateUtils.hpp>
+#include <windows.h>
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -107,6 +109,100 @@ void __fastcall TForm2::BitBtn1Click(TObject *Sender)
 {
 
 
+	 DBGrid1->Visible = false;
+	 int cout_otchet;
+
+
+	if(ADOQuery1->RecNo !=1)
+	{
+		cout_otchet =  ADOQuery1->RecordCount - ADOQuery1->RecNo +1;
+	}
+	else
+	{
+		cout_otchet = ADOQuery1->RecordCount;
+	}
+
+		//ShowMessage(cout_otchet);
+		Memo2->Lines->LoadFromFile("upload_code.html");
+
+
+
+		 for (cout_otchet; cout_otchet > 0; cout_otchet--)
+		 {
+
+				 Memo2->Lines->Add("<tr>");
+				String column[10] = {"number","nom","data","frome","ish","sod","komu","dateisp","isp","ishn"};
+				int column_nom=0;
+
+
+
+				for(int b=10; b >0; b--)
+				{
+
+					String FIRST_HTML = "<td width='62' height='27'><p align='center'><span style='font-size:10pt;'><font face='Times New Roman'>&nbsp;</font></span></p></td>";
+					FIRST_HTML   = StringReplace(FIRST_HTML,"&nbsp;",VarToStr(ADOQuery1->FieldByName(column[column_nom])->Value),TReplaceFlags()<<rfReplaceAll);
+					Memo2->Lines->Add(FIRST_HTML);
+					column_nom++;
+				}
+
+				Memo2->Lines->Add("</tr>");
+				//StatusBar1->Panels->Items[3]->Text = IntToStr((ADOQuery1->RecNo * 100) / (cout_otchet)) +" %";    //  показываем % выгрузки
+				ADOQuery1->Next();
+
+		 }
+
+		 Memo2->Lines->Add("</table><p>&nbsp;</p></body></html>");
+		 Memo2->Lines->SaveToFile("otchet.html");
+		 ShellExecuteA(Handle, "open", "otchet.html", NULL, NULL, SW_SHOWNORMAL);
+
+
+
+
+
+
+
+	DBGrid1->Visible = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*       ВЫВОД В ВОРД - РАБОТАЕ ПРОСТО ПОКА ОТКЛЮЧИЛ
+
 	 Variant Word, Document, Table, var, Cell, R, v;   // создаем объекты
 	 String CellText[10];
 
@@ -126,13 +222,13 @@ void __fastcall TForm2::BitBtn1Click(TObject *Sender)
 		  //ShowMessage("1");
 
 
-                if(ADOQuery1->RecNo !=1)
-                {
-                        cout_otchet =  ADOQuery1->RecordCount - ADOQuery1->RecNo +1;
-                }
-                else
-                {
-                        cout_otchet = ADOQuery1->RecordCount;
+				if(ADOQuery1->RecNo !=1)
+				{
+						cout_otchet =  ADOQuery1->RecordCount - ADOQuery1->RecNo +1;
+				}
+				else
+				{
+						cout_otchet = ADOQuery1->RecordCount;
 				}
 			   //ShowMessage("2");
 		Document.OlePropertyGet("Tables").OleProcedure("Add", Document.OleFunction("Range"), cout_otchet, 10, 2, 2);  //рисуем таблицу в зависимости от того сколько у нас в базе на данный момент записей т.е. сколько сейчас отображаетс¤ в DBGrid или же с того места где стоит курсор
@@ -248,7 +344,7 @@ void __fastcall TForm2::BitBtn1Click(TObject *Sender)
 				b = 10;
 				a ++;
            }
-		   /* вывода последней строки*/
+		   // вывода последней строки
 		  if (ADOQuery1->RecNo == ADOQuery1->RecordCount)
            {
 
@@ -313,7 +409,7 @@ void __fastcall TForm2::BitBtn1Click(TObject *Sender)
 	   DBGrid1->Visible = true;
        ADOQuery1->First();
 	   //ProgressBar1->Visible = false;
-
+		   */
 
 }
 //---------------------------------------------------------------------------
