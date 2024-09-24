@@ -41,6 +41,7 @@ __published:	// IDE-managed Components
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
+	void __fastcall Button1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

@@ -429,7 +429,8 @@ void __fastcall TForm2::BitBtn2Click(TObject *Sender)
 	Form4->sod->Clear();
 	Form4->komu->Clear();
 	Form4->ishn->Clear();
-    Form4->FilePatch->Caption = "-";
+	Form4->FilePatch->Caption = "-";
+	Form4->FileName->Caption = "No_File";
 	//---------Загружаем список исполнителей в комбобокс--------------------
 		IspList->Active = false;
 		IspList->SQL->Text = "SELECT * FROM isplist ORDER BY ispname";
@@ -447,6 +448,7 @@ void __fastcall TForm2::BitBtn2Click(TObject *Sender)
 
     Form4->isp->Text = "";
 	Form4->CheckBox1->Checked = false;
+    //Form4->OpenDialog1->Execute() = false;
 	Form4->ShowModal();
 }
 //---------------------------------------------------------------------------
@@ -501,7 +503,7 @@ void __fastcall TForm2::BitBtn3Click(TObject *Sender)
 	}
 	catch(Exception &e)
 	{
-
+		   Form4->dateisp->Date =Date();
 	}
 
     try
@@ -510,7 +512,7 @@ void __fastcall TForm2::BitBtn3Click(TObject *Sender)
 	}
 	catch(Exception &e)
 	{
-
+		 Form4->ishn->Text ="";
 	}
 
 	if(ADOQuery1->FieldByName("ispflag")->Value == "1")

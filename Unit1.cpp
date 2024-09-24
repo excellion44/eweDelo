@@ -72,7 +72,7 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Label7->Caption = Form2->ADOQuery1->RecordCount;
 
 
-    Form2->ADOQuery1->Active = false;
+	Form2->ADOQuery1->Active = false;
 	Form2->ADOQuery1->SQL->Text = "select* from vhod where ispflag=1 order by number";
 	Form2->ADOQuery1->Active = true;
 	Label9->Caption = Form2->ADOQuery1->RecordCount;
@@ -88,4 +88,12 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 
 
 
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+	   Form2->ADOQuery1->Active = false;
+	   Form2->ADOQuery1->SQL->Text = "update vhod set file_name = 'No_File' where file_name='Нет файла'";
+	   Form2->ADOQuery1->Active = true;
+}
+//---------------------------------------------------------------------------
 

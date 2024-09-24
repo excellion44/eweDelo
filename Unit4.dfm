@@ -272,7 +272,6 @@ object Form4: TForm4
     Font.Style = []
     ParentFont = False
     TabOrder = 6
-    Text = 'ishn'
   end
   object BitBtn1: TBitBtn
     Left = 8
@@ -316,7 +315,6 @@ object Form4: TForm4
     Font.Style = []
     ParentFont = False
     TabOrder = 9
-    Text = 'isp'
   end
   object date: TDateTimePicker
     Left = 142
