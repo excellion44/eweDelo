@@ -83,27 +83,27 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 
 		if(dateisp->Enabled == false && FileName->Caption != "No_File")
 		{
-			ShowMessage("1");
+			//ShowMessage("1");
 			Form2->ADOQuery1->SQL->Text = "INSERT INTO vhod VALUES (dmax('vindex', 'vhod')+1, "+number->Text+",'"+date->Date+"','"+from->Text+"','"+ish->Text+"','"+sod->Text+"','"+komu->Text+"','"+isp->Text+"', null ,'"+CheckIsp+"','"+nom->Text+"','"+ishn->Text+"','rez',:BlobValue,'"+FileName->Caption+"') ";
 			Form2->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
 			Form2->ADOQuery1->ExecSQL();
 		}
 		else if(dateisp->Enabled == true && FileName->Caption != "No_File")
 		{
-			ShowMessage("2");
+			//ShowMessage("2");
 			Form2->ADOQuery1->SQL->Text = "INSERT INTO vhod VALUES (dmax('vindex', 'vhod')+1, "+number->Text+",'"+date->Date+"','"+from->Text+"','"+ish->Text+"','"+sod->Text+"','"+komu->Text+"','"+isp->Text+"','"+dateisp->Date+"','"+CheckIsp+"','"+nom->Text+"','"+ishn->Text+"','rez',:BlobValue,'"+FileName->Caption+"') ";
 			Form2->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
 			Form2->ADOQuery1->ExecSQL();
 		}
 		else if(dateisp->Enabled == false && FileName->Caption == "No_File")
 		{
-			ShowMessage("3");
+			//ShowMessage("3");
 			Form2->ADOQuery1->SQL->Text = "INSERT INTO vhod VALUES (dmax('vindex', 'vhod')+1, "+number->Text+",'"+date->Date+"','"+from->Text+"','"+ish->Text+"','"+sod->Text+"','"+komu->Text+"','"+isp->Text+"',null,'"+CheckIsp+"','"+nom->Text+"','"+ishn->Text+"','rez',Null,'No_File') ";
 			Form2->ADOQuery1->ExecSQL();
 		}
 		else if(dateisp->Enabled == true && FileName->Caption == "No_File")
 		{
-			ShowMessage("4");
+			//ShowMessage("4");
 			Form2->ADOQuery1->SQL->Text = "INSERT INTO vhod VALUES (dmax('vindex', 'vhod')+1, "+number->Text+",'"+date->Date+"','"+from->Text+"','"+ish->Text+"','"+sod->Text+"','"+komu->Text+"','"+isp->Text+"','"+dateisp->Date+"','"+CheckIsp+"','"+nom->Text+"','"+ishn->Text+"','rez',Null,'No_File') ";
 			Form2->ADOQuery1->ExecSQL();
 		}
@@ -141,12 +141,12 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 
 		if((Form2->ADOQuery1->FieldByName("file_name")->Value == "No_File" || Form2->ADOQuery1->FieldByName("file_name")->Value == "" || Form2->ADOQuery1->FieldByName("file_name")->Value == "Нет файла") && dateisp->Enabled == false && FileName->Caption != "No_File")
 		{
-			  ShowMessage("1");
+			  //ShowMessage("1");
 			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp =Null, ispflag ='"+CheckIsp+"',rez ='rez', file =:BlobValue, file_name ='"+FileName->Caption+"' WHERE number IN ("+ID->Caption+") ";
 			 Form2->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
 			 Form2->ADOQuery1->ExecSQL();
              Form2->ADOQuery1->Active = false;
-			 ShowMessage("1-1");
+			 //ShowMessage("1-1");
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
 			Form2->ADOQuery1->Active = true;
 			Form2->StatusBar1->Panels->Items[1]->Text = Form2->ADOQuery1->RecordCount;
@@ -157,12 +157,12 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 		}
 		if((Form2->ADOQuery1->FieldByName("file_name")->Value == "No_File" || Form2->ADOQuery1->FieldByName("file_name")->Value == "" || Form2->ADOQuery1->FieldByName("file_name")->Value == "Нет файла") && dateisp->Enabled == true && FileName->Caption !="No_File")
 		{
-			 ShowMessage("2");
+			 //ShowMessage("2");
 			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"',rez ='rez', file =:BlobValue, file_name ='"+FileName->Caption+"' WHERE number IN ("+ID->Caption+") ";
 			 Form2->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
 			 Form2->ADOQuery1->ExecSQL();
              Form2->ADOQuery1->Active = false;
-			ShowMessage("1-2");
+			//ShowMessage("1-2");
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
 			Form2->ADOQuery1->Active = true;
 			Form2->StatusBar1->Panels->Items[1]->Text = Form2->ADOQuery1->RecordCount;
@@ -172,11 +172,11 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 		}
 		else if(dateisp->Enabled == false && Form2->ADOQuery1->FieldByName("ishn")->Value == "")
 		{
-			 ShowMessage("3");
+			 //ShowMessage("3");
 			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp = Null, ispflag ='"+CheckIsp+"' WHERE number IN ("+ID->Caption+") ";
 			 Form2->ADOQuery1->ExecSQL();
              Form2->ADOQuery1->Active = false;
-			ShowMessage("1-3");
+			//ShowMessage("1-3");
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
 			Form2->ADOQuery1->Active = true;
 			Form2->StatusBar1->Panels->Items[1]->Text = Form2->ADOQuery1->RecordCount;
@@ -186,11 +186,11 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 		}
 		else if(dateisp->Enabled == false && Form2->ADOQuery1->FieldByName("ishn")->Value != "")
 		{
-			 ShowMessage("5");
+			 //ShowMessage("5");
 			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"' WHERE number IN ("+ID->Caption+") ";
 			 Form2->ADOQuery1->ExecSQL();
              Form2->ADOQuery1->Active = false;
-			ShowMessage("1-4");
+			//ShowMessage("1-4");
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
 			Form2->ADOQuery1->Active = true;
 			Form2->StatusBar1->Panels->Items[1]->Text = Form2->ADOQuery1->RecordCount;
@@ -200,11 +200,11 @@ void __fastcall TForm4::BitBtn1Click(TObject *Sender)
 		}
 		else if(dateisp->Enabled == true)
 		{
-			 ShowMessage("4");
+			 //ShowMessage("4");
 			 Form2->ADOQuery1->SQL->Text="UPDATE vhod SET nom ='"+nom->Text+"', data ='"+date->Date+"',frome ='"+from->Text+"', ish ='"+ish->Text+"', sod ='"+sod->Text+"', komu ='"+komu->Text+"', isp ='"+isp->Text+"', dateisp ='"+dateisp->Date+"', ispflag ='"+CheckIsp+"' WHERE number IN ("+ID->Caption+") ";
 			 Form2->ADOQuery1->ExecSQL();
              Form2->ADOQuery1->Active = false;
-			ShowMessage("1-5");
+			//ShowMessage("1-5");
 			Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
 			Form2->ADOQuery1->Active = true;
 			Form2->StatusBar1->Panels->Items[1]->Text = Form2->ADOQuery1->RecordCount;

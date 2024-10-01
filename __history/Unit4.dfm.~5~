@@ -1,0 +1,387 @@
+object Form4: TForm4
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = #1060#1086#1088#1084#1072' '#1076#1086#1073#1072#1074#1083#1077#1085#1080#1103' - '#1088#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1103
+  ClientHeight = 217
+  ClientWidth = 810
+  Color = cl3DLight
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ADD_OR_EDIT: TLabel
+    Left = 392
+    Top = 5
+    Width = 71
+    Height = 13
+    Caption = 'ADD_OR_EDIT'
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 14
+    Height = 13
+    Caption = #8470
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 71
+    Top = 8
+    Width = 46
+    Height = 13
+    Caption = #1046#1091#1088#1085#1072#1083
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 142
+    Top = 8
+    Width = 31
+    Height = 13
+    Caption = #1044#1072#1090#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 261
+    Top = 8
+    Width = 55
+    Height = 13
+    Caption = #1048#1089#1090#1086#1095#1085#1080#1082
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 655
+    Top = 8
+    Width = 79
+    Height = 13
+    Caption = #8470' '#1048#1089#1090#1086#1095#1085#1080#1082#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 8
+    Top = 59
+    Width = 126
+    Height = 13
+    Caption = #1050#1088#1072#1090#1082#1086#1077' '#1089#1086#1076#1077#1088#1078#1072#1085#1080#1077
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label7: TLabel
+    Left = 8
+    Top = 111
+    Width = 69
+    Height = 13
+    Caption = #1053#1072#1079#1085#1072#1095#1077#1085#1080#1077
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 344
+    Top = 111
+    Width = 76
+    Height = 13
+    Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label9: TLabel
+    Left = 543
+    Top = 111
+    Width = 101
+    Height = 13
+    Caption = #1044#1072#1090#1072' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label11: TLabel
+    Left = 678
+    Top = 111
+    Width = 83
+    Height = 13
+    Caption = #1048#1089#1093#1086#1076#1103#1097#1080#1081' '#8470
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3552822
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object ID: TLabel
+    Left = 608
+    Top = 59
+    Width = 11
+    Height = 13
+    Caption = 'ID'
+  end
+  object FileName: TLabel
+    Left = 8
+    Top = 196
+    Width = 43
+    Height = 13
+    Caption = 'FileName'
+    OnClick = FileNameClick
+  end
+  object FilePatch: TLabel
+    Left = 273
+    Top = 59
+    Width = 43
+    Height = 13
+    Caption = 'FilePatch'
+  end
+  object number: TEdit
+    Left = 8
+    Top = 24
+    Width = 57
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Text = 'number'
+  end
+  object nom: TComboBox
+    Left = 71
+    Top = 24
+    Width = 65
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Text = 'nom'
+  end
+  object from: TEdit
+    Left = 260
+    Top = 24
+    Width = 389
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    Text = 'from'
+  end
+  object ish: TEdit
+    Left = 655
+    Top = 24
+    Width = 144
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    Text = 'ish'
+  end
+  object sod: TEdit
+    Left = 8
+    Top = 78
+    Width = 791
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    Text = 'sod'
+  end
+  object komu: TEdit
+    Left = 8
+    Top = 128
+    Width = 308
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    Text = 'komu'
+  end
+  object ishn: TEdit
+    Left = 678
+    Top = 128
+    Width = 121
+    Height = 24
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 6
+  end
+  object BitBtn1: TBitBtn
+    Left = 8
+    Top = 158
+    Width = 215
+    Height = 25
+    Caption = 'BitBtn1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 7
+    OnClick = BitBtn1Click
+  end
+  object BitBtn2: TBitBtn
+    Left = 344
+    Top = 158
+    Width = 185
+    Height = 25
+    Caption = #1054#1090#1084#1077#1085#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 8
+    OnClick = BitBtn2Click
+  end
+  object isp: TComboBox
+    Left = 344
+    Top = 128
+    Width = 185
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 9
+  end
+  object date: TDateTimePicker
+    Left = 142
+    Top = 24
+    Width = 110
+    Height = 24
+    Date = 44674.000000000000000000
+    Time = 0.906391238422656900
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+  end
+  object dateisp: TDateTimePicker
+    Left = 559
+    Top = 128
+    Width = 106
+    Height = 24
+    Date = 44674.000000000000000000
+    Time = 0.911005115740408700
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 11
+  end
+  object CheckBox1: TCheckBox
+    Left = 631
+    Top = 162
+    Width = 202
+    Height = 17
+    Caption = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1085#1072' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1077
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 12
+    OnClick = CheckBox1Click
+  end
+  object BitBtn3: TBitBtn
+    Left = 532
+    Top = 128
+    Width = 24
+    Height = 24
+    Caption = '+'
+    TabOrder = 13
+    OnClick = BitBtn3Click
+  end
+  object BitBtn4: TBitBtn
+    Left = 318
+    Top = 128
+    Width = 24
+    Height = 24
+    Caption = '-'
+    TabOrder = 14
+    OnClick = BitBtn4Click
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 264
+    Top = 160
+  end
+end

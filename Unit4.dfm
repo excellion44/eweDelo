@@ -22,6 +22,7 @@ object Form4: TForm4
     Width = 71
     Height = 13
     Caption = 'ADD_OR_EDIT'
+    Visible = False
   end
   object Label1: TLabel
     Left = 8
@@ -159,6 +160,7 @@ object Form4: TForm4
     Width = 11
     Height = 13
     Caption = 'ID'
+    Visible = False
   end
   object FileName: TLabel
     Left = 8
@@ -174,6 +176,7 @@ object Form4: TForm4
     Width = 43
     Height = 13
     Caption = 'FilePatch'
+    Visible = False
   end
   object number: TEdit
     Left = 8

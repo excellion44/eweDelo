@@ -653,3 +653,4 @@ void __fastcall TForm2::SearchSodKeyUp(TObject *Sender, WORD &Key, TShiftState S
 }
 //---------------------------------------------------------------------------
 
+

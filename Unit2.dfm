@@ -32,6 +32,13 @@ object Form2: TForm2
       end
       item
         Width = 50
+      end
+      item
+        Text = #1041#1072#1079#1072':'
+        Width = 50
+      end
+      item
+        Width = 50
       end>
   end
   object DBGrid1: TDBGrid

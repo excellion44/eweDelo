@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Cursor = crHandPoint
   Caption = 'EWE '#1044#1077#1083#1086#1087#1088#1086#1080#1079#1074#1086#1076#1089#1090#1074#1086
-  ClientHeight = 638
+  ClientHeight = 643
   ClientWidth = 1267
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poMainFormCenter
   OnShow = FormShow
@@ -137,7 +138,7 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 185
-    Height = 638
+    Height = 643
     VertScrollBar.Tracking = True
     HeaderFont.Charset = DEFAULT_CHARSET
     HeaderFont.Color = clWindowText
@@ -213,7 +214,7 @@ object Form1: TForm1
       TabOrder = 1
       object Label1: TLabel
         Left = 8
-        Top = 8
+        Top = 22
         Width = 60
         Height = 13
         Cursor = crHandPoint
@@ -228,7 +229,7 @@ object Form1: TForm1
       end
       object Label2: TLabel
         Left = 8
-        Top = 27
+        Top = 42
         Width = 67
         Height = 13
         Cursor = crHandPoint
@@ -241,20 +242,117 @@ object Form1: TForm1
         ParentFont = False
         OnClick = Label2Click
       end
+      object Label16: TLabel
+        Left = 8
+        Top = 4
+        Width = 48
+        Height = 13
+        Caption = #1043#1083#1072#1074#1085#1072#1103
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        OnClick = Label16Click
+      end
     end
   end
   object Button1: TButton
-    Left = 760
-    Top = 552
+    Left = 867
+    Top = 26
     Width = 75
     Height = 25
     Caption = 'Button1'
     TabOrder = 1
+    Visible = False
     OnClick = Button1Click
   end
-  object PopupMenu1: TPopupMenu
-    Left = 872
+  object Button2: TButton
+    Left = 904
+    Top = 57
+    Width = 75
+    Height = 25
+    Caption = 'Button2'
+    TabOrder = 2
+    Visible = False
+    OnClick = Button2Click
+  end
+  object Edit1: TEdit
+    Left = 202
     Top = 544
+    Width = 815
+    Height = 21
+    TabOrder = 3
+    Text = 'Edit1'
+    Visible = False
+  end
+  object Button3: TButton
+    Left = 488
+    Top = 611
+    Width = 75
+    Height = 25
+    Caption = 'Button3'
+    TabOrder = 4
+    Visible = False
+    OnClick = Button3Click
+  end
+  object Edit2: TEdit
+    Left = 202
+    Top = 584
+    Width = 815
+    Height = 21
+    TabOrder = 5
+    Text = 'Edit2'
+    Visible = False
+  end
+  object GroupBox1: TGroupBox
+    Left = 191
+    Top = 172
+    Width = 202
+    Height = 109
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1042#1061#1054#1044#1071#1065#1048#1045
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold, fsItalic]
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 6
+    object Label17: TLabel
+      Left = 11
+      Top = 30
+      Width = 88
+      Height = 13
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1073#1072#1079#1091
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ComboBox1: TComboBox
+      Left = 11
+      Top = 49
+      Width = 175
+      Height = 24
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnChange = ComboBox1Change
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 584
+    Top = 64
     object PopupMenu11: TMenuItem
       Caption = #1042#1099#1093#1086#1076
     end
@@ -2377,12 +2475,31 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     PopupMenu = PopupMenu1
     Visible = True
-    Left = 920
-    Top = 544
+    Left = 632
+    Top = 64
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 960
-    Top = 544
+    Left = 672
+    Top = 64
+  end
+  object OpenDialog1: TOpenDialog
+    Options = [ofHideReadOnly, ofExtensionDifferent, ofPathMustExist, ofFileMustExist, ofCreatePrompt, ofShareAware, ofNoReadOnlyReturn, ofNoTestFileCreate, ofNoNetworkButton, ofNoLongNames, ofOldStyleDialog, ofNoDereferenceLinks, ofEnableIncludeNotify, ofEnableSizing, ofDontAddToRecent, ofForceShowHidden]
+    Left = 864
+    Top = 56
+  end
+  object MainMenu1: TMainMenu
+    Left = 768
+    Top = 384
+    object N1: TMenuItem
+      Caption = #1060#1072#1081#1083
+    end
+    object N2: TMenuItem
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+      object N3: TMenuItem
+        Caption = #1041#1072#1079#1099
+        OnClick = N3Click
+      end
+    end
   end
 end
