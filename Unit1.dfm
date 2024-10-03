@@ -285,7 +285,6 @@ object Form1: TForm1
     Height = 21
     TabOrder = 3
     Text = 'Edit1'
-    Visible = False
   end
   object Button3: TButton
     Left = 488

@@ -27,7 +27,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void ChangeDataSource(String DBName)
+void ChangeDataSource(String DBName, String DBpath)
 {
 	 Form2->ADOConnection1->Close();
 
@@ -35,7 +35,7 @@ void ChangeDataSource(String DBName)
 	String currentConnectionString = Form2->ADOConnection1->ConnectionString;
 
 	// Новый источник данных
-	String newDataSource = DBName;
+	String newDataSource = DBpath + "\\" + DBName;
 
 	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
 
@@ -60,7 +60,7 @@ void __fastcall TForm1::Label1Click(TObject *Sender)
 	Form2->DBGrid1->Align = alClient;
 	Form2->DBGrid1->BorderStyle = bsNone;
 	Form2->RadioButton1->Checked = true;
-	ChangeDataSource(ComboBox1->Text);
+	ChangeDataSource(ComboBox1->Text, ini->ReadString("SETTINGBASE","DBVhod",""));
 	Form2->SearchNom->Items->Clear();
 	Form2->SearchNom->Items->LoadFromFile("journal.ewe");
     Form2->ADOQuery1->Active = false;
@@ -99,6 +99,8 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 
 void __fastcall TForm1::FormShow(TObject *Sender)
 {
+	ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
+
 	Label5->Caption = DateToStr(Date())+" "+Time();
 
 	Form2->ADOQuery1->Active = false;
@@ -113,11 +115,11 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Label9->Caption = Form2->ADOQuery1->RecordCount;
 
 
-    Form2->ADOQuery1->Active = false;
+	Form2->ADOQuery1->Active = false;
 	Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod where dateisp < NOW() AND ispflag = 1 ORDER BY number";
 	Form2->ADOQuery1->Active = true;
 	Label11->Caption = Form2->ADOQuery1->RecordCount;
-    Button1->Click();
+	Button1->Click();
 }
 //---------------------------------------------------------------------------
 
@@ -214,6 +216,25 @@ void __fastcall TForm1::N3Click(TObject *Sender)
 void __fastcall TForm1::ComboBox1Change(TObject *Sender)
 {
 	ini->WriteString("SETTINGBASE","DefaultDB",ComboBox1->Items->Strings[ComboBox1->ItemIndex]);
+
+    ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
+
+    Form2->ADOQuery1->Active = false;
+	Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod ORDER BY number";
+	Form2->ADOQuery1->Active = true;
+	Label7->Caption = Form2->ADOQuery1->RecordCount;
+
+
+	Form2->ADOQuery1->Active = false;
+	Form2->ADOQuery1->SQL->Text = "select* from vhod where ispflag=1 order by number";
+	Form2->ADOQuery1->Active = true;
+	Label9->Caption = Form2->ADOQuery1->RecordCount;
+
+
+	Form2->ADOQuery1->Active = false;
+	Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod where dateisp < NOW() AND ispflag = 1 ORDER BY number";
+	Form2->ADOQuery1->Active = true;
+	Label11->Caption = Form2->ADOQuery1->RecordCount;
 }
 //---------------------------------------------------------------------------
 
