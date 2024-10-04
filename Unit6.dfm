@@ -908,6 +908,15 @@ object Form6: TForm6
         E8E7E7E8E7E7E8E9E9EA}
       TabOrder = 3
     end
+    object Button1: TButton
+      Left = 448
+      Top = 24
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 4
+      OnClick = Button1Click
+    end
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -934,10 +943,16 @@ object Form6: TForm6
   end
   object ADOConnection1: TADOConnection
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Password="";Data Source=ish2022' +
-      '.mdb;Persist Security Info=True'
+      'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source=doc20' +
+      '22.mdb;Mode=Share Deny None;Persist Security Info=False;Jet OLED' +
+      'B:System database="";Jet OLEDB:Registry Path="";Jet OLEDB:Databa' +
+      'se Password="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Lockin' +
+      'g Mode=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bu' +
+      'lk Transactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:C' +
+      'reate System Database=False;Jet OLEDB:Encrypt Database=False;Jet' +
+      ' OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact With' +
+      'out Replica Repair=False;Jet OLEDB:SFP=False;'
     LoginPrompt = False
-    Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 528
     Top = 232

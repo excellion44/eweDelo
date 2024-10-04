@@ -220,7 +220,7 @@ object Form1: TForm1
         Cursor = crHandPoint
         Caption = #1042#1093#1086#1076#1103#1097#1080#1077
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -235,7 +235,7 @@ object Form1: TForm1
         Cursor = crHandPoint
         Caption = #1048#1089#1093#1086#1076#1103#1097#1080#1077
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -249,7 +249,7 @@ object Form1: TForm1
         Height = 13
         Caption = #1043#1083#1072#1074#1085#1072#1103
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
@@ -303,7 +303,6 @@ object Form1: TForm1
     Height = 21
     TabOrder = 5
     Text = 'Edit2'
-    Visible = False
   end
   object GroupBox1: TGroupBox
     Left = 191
@@ -348,6 +347,56 @@ object Form1: TForm1
       TabOrder = 0
       OnChange = ComboBox1Change
     end
+  end
+  object GroupBox2: TGroupBox
+    Left = 447
+    Top = 172
+    Width = 202
+    Height = 109
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1080#1089#1093#1086#1076#1103#1097#1080#1077
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold, fsItalic]
+    ParentFont = False
+    TabOrder = 7
+    object Label18: TLabel
+      Left = 12
+      Top = 29
+      Width = 88
+      Height = 13
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1073#1072#1079#1091
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ComboBox2: TComboBox
+      Left = 9
+      Top = 48
+      Width = 177
+      Height = 24
+      Color = clMenu
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnChange = ComboBox2Change
+    end
+  end
+  object Edit3: TEdit
+    Left = 202
+    Top = 318
+    Width = 815
+    Height = 21
+    TabOrder = 8
+    Text = 'Edit3'
   end
   object PopupMenu1: TPopupMenu
     Left = 584

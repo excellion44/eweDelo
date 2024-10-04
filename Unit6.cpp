@@ -72,3 +72,9 @@ void __fastcall TForm6::DBGrid1DblClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm6::Button1Click(TObject *Sender)
+{
+    ShowMessage(ADOConnection1->ConnectionString);
+}
+//---------------------------------------------------------------------------
+

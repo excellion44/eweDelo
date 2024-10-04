@@ -48,6 +48,31 @@ void ChangeDataSource(String DBName, String DBpath)
 	// Вы можете открыть соединение, если это необходимо
 	 Form2->ADOConnection1->Open();
 }
+//---------------------------------------------------------------------------
+void ChangeDataSourceIsh(String DBName, String DBpath)
+{
+	 Form6->ADOConnection1->Close();
+
+	// Сохраняем текущую строку подключения
+	String currentConnectionString = Form6->ADOConnection1->ConnectionString;
+
+	// Новый источник данных
+	String newDataSource = DBpath + "\\" + DBName;
+
+
+
+	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
+
+
+	// Собираем строку подключения обратно
+	Form6->ADOConnection1->ConnectionString = newConnectionString;
+	Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
+
+
+	// Вы можете открыть соединение, если это необходимо
+	 Form6->ADOConnection1->Open();
+	  //Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
+}
 
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Label1Click(TObject *Sender)
@@ -75,13 +100,14 @@ void __fastcall TForm1::Label1Click(TObject *Sender)
 
 void __fastcall TForm1::Label2Click(TObject *Sender)
 {
-    Form2->Close();
+	Form2->Close();
 	Form6->Parent = this;
 	Form6->SetBounds(3,3,300,150);
 	Form6->Align = alClient;
 	Form6->BorderStyle = bsNone;
 	Form6->DBGrid1->Align = alClient;
 	Form6->DBGrid1->BorderStyle = bsNone;
+	ChangeDataSourceIsh(ComboBox2->Text, ini->ReadString("SETTINGBASE","DBIsh",""));
 	Form6->ADOQuery1->Active = false;
 	Form6->ADOQuery1->SQL->Text = "SELECT * FROM ish ORDER BY number";
 	Form6->ADOQuery1->Active = true;
@@ -100,6 +126,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 void __fastcall TForm1::FormShow(TObject *Sender)
 {
 	ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
+	ChangeDataSourceIsh(ini->ReadString("SETTINGBASE","DefaultDBIsh",""), ini->ReadString("SETTINGBASE","DBIsh",""));
 
 	Label5->Caption = DateToStr(Date())+" "+Time();
 
@@ -129,17 +156,18 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-
+			String searchPath;
+			int result;
 
 			// Очистка ComboBox перед добавлением новых элементов
 			ComboBox1->Clear();
 
 			// Переменные для поиска файлов
 			TSearchRec searchRec;
-			String searchPath = ini->ReadString("SETTINGBASE","DBVhod","") +"\\*.mdb"; // Путь к файлам
+			 searchPath = ini->ReadString("SETTINGBASE","DBVhod","") +"\\*.mdb"; // Путь к файлам
 
 			// Запуск поиска файлов
-			int result = FindFirst(searchPath, faArchive, searchRec);
+			 result = FindFirst(searchPath, faArchive, searchRec);
 
 			// Проверяем, найдены ли файлы
 			if (result == 0) // Если файлы найдены
@@ -156,7 +184,37 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			}
 			else // Если файлы не найдены
 			{
-				ShowMessage("Файлы с расширением .mdb не найдены ");
+				ShowMessage("Файлы с расширением .mdb не найдены Входящие ");
+			}
+
+			// Освобождаем ресурсы
+			FindClose(searchRec);
+			//---------------------ИСХОДЯЩИЕ--------------------------
+
+            // Очистка ComboBox перед добавлением новых элементов
+			ComboBox2->Clear();
+
+			 searchPath = ini->ReadString("SETTINGBASE","DBIsh","") +"\\*.mdb"; // Путь к файлам
+
+			// Запуск поиска файлов
+			 result = FindFirst(searchPath, faArchive, searchRec);
+
+			// Проверяем, найдены ли файлы
+			if (result == 0) // Если файлы найдены
+			{
+				do {
+					// Добавляем имя файла (без пути) в ComboBox
+					ComboBox2->Items->Add(searchRec.Name);
+
+					// Переходим к следующему файлу
+					result = FindNext(searchRec);
+				} while (result == 0);
+
+				ComboBox2->Text = ini->ReadString("SETTINGBASE","DefaultDBIsh","2024.mdb");
+			}
+			else // Если файлы не найдены
+			{
+				ShowMessage("Файлы с расширением .mdb не найдены Исходящие ");
 			}
 
 			// Освобождаем ресурсы
@@ -235,6 +293,12 @@ void __fastcall TForm1::ComboBox1Change(TObject *Sender)
 	Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod where dateisp < NOW() AND ispflag = 1 ORDER BY number";
 	Form2->ADOQuery1->Active = true;
 	Label11->Caption = Form2->ADOQuery1->RecordCount;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ComboBox2Change(TObject *Sender)
+{
+	ini->WriteString("SETTINGBASE","DefaultDBIsh",ComboBox2->Items->Strings[ComboBox2->ItemIndex]);
 }
 //---------------------------------------------------------------------------
 

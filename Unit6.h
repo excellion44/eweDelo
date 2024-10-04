@@ -28,10 +28,12 @@ __published:	// IDE-managed Components
 	TADOConnection *ADOConnection1;
 	TDataSource *DataSource1;
 	TStatusBar *StatusBar1;
+	TButton *Button1;
 	void __fastcall BitBtn1Click(TObject *Sender);
 	void __fastcall BitBtn2Click(TObject *Sender);
 	void __fastcall BitBtn3Click(TObject *Sender);
 	void __fastcall DBGrid1DblClick(TObject *Sender);
+	void __fastcall Button1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm6(TComponent* Owner);
