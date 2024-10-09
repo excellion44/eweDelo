@@ -211,6 +211,12 @@ object Form1: TForm1
       Top = 0
       Height = 137
       Caption = #1042#1093#1086#1076#1103#1097#1080#1077' - '#1048#1089#1093#1086#1076#1103#1097#1080#1077
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 1
       object Label1: TLabel
         Left = 8
@@ -285,6 +291,7 @@ object Form1: TForm1
     Height = 21
     TabOrder = 3
     Text = 'Edit1'
+    Visible = False
   end
   object Button3: TButton
     Left = 488
@@ -303,6 +310,7 @@ object Form1: TForm1
     Height = 21
     TabOrder = 5
     Text = 'Edit2'
+    Visible = False
   end
   object GroupBox1: TGroupBox
     Left = 191
@@ -315,7 +323,7 @@ object Form1: TForm1
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = [fsBold, fsItalic]
+    Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
     TabOrder = 6
@@ -337,9 +345,10 @@ object Form1: TForm1
       Top = 49
       Width = 175
       Height = 24
+      Style = csDropDownList
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
+      Font.Color = clLime
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
@@ -358,7 +367,7 @@ object Form1: TForm1
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = [fsBold, fsItalic]
+    Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 7
     object Label18: TLabel
@@ -379,6 +388,7 @@ object Form1: TForm1
       Top = 48
       Width = 177
       Height = 24
+      Style = csDropDownList
       Color = clMenu
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -397,6 +407,7 @@ object Form1: TForm1
     Height = 21
     TabOrder = 8
     Text = 'Edit3'
+    Visible = False
   end
   object PopupMenu1: TPopupMenu
     Left = 584

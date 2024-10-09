@@ -11,6 +11,8 @@
 #include "trayicon.h"
 #include <Vcl.Menus.hpp>
 #include <Vcl.Dialogs.hpp>
+#include "cgrid.h"
+#include <Vcl.ColorGrd.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {

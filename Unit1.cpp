@@ -17,6 +17,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "trayicon"
+#pragma link "cgrid"
 #pragma resource "*.dfm"
 TForm1 *Form1;
 String selectedDir;
@@ -25,6 +26,15 @@ TIniFile *ini = new TIniFile (ExtractFilePath(ParamStr(0))+"EWEsetting.ini");
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
+}
+//----------------------[Перевод цветов из HEX в RGB]--------------------------------------
+TColor HexToColor(const String& hex)
+{
+    int r = StrToInt("0x" + hex.SubString(2, 2)); // 2 символа после #
+    int g = StrToInt("0x" + hex.SubString(4, 2)); // 2 символа после #
+    int b = StrToInt("0x" + hex.SubString(6, 2)); // 2 символа после #
+
+    return TColor(RGB(r, g, b));
 }
 //---------------------------------------------------------------------------
 void ChangeDataSource(String DBName, String DBpath)
@@ -147,6 +157,15 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Form2->ADOQuery1->Active = true;
 	Label11->Caption = Form2->ADOQuery1->RecordCount;
 	Button1->Click();
+	Label1->Font->Color = HexToColor("#e06214");
+	Label16->Font->Color = HexToColor("#e06214");
+	Label2->Font->Color = HexToColor("#e06214");
+
+
+	//-------------------- Для Combobox -------------------------------------
+	ComboBox1->Font->Color = HexToColor("#8c00ff");
+	ComboBox2->Font->Color = HexToColor("#8c00ff");
+
 }
 //---------------------------------------------------------------------------
 
@@ -180,7 +199,10 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 					result = FindNext(searchRec);
 				} while (result == 0);
 
-				ComboBox1->Text = ini->ReadString("SETTINGBASE","DefaultDB","2024.mdb");
+
+
+				ComboBox1->ItemIndex = ComboBox1->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDB","2024.mdb"));
+
 			}
 			else // Если файлы не найдены
 			{
@@ -210,7 +232,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 					result = FindNext(searchRec);
 				} while (result == 0);
 
-				ComboBox2->Text = ini->ReadString("SETTINGBASE","DefaultDBIsh","2024.mdb");
+			ComboBox2->ItemIndex = ComboBox2->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDBIsh","2024.mdb"));
 			}
 			else // Если файлы не найдены
 			{
@@ -301,4 +323,6 @@ void __fastcall TForm1::ComboBox2Change(TObject *Sender)
 	ini->WriteString("SETTINGBASE","DefaultDBIsh",ComboBox2->Items->Strings[ComboBox2->ItemIndex]);
 }
 //---------------------------------------------------------------------------
+
+
 
