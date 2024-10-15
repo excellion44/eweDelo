@@ -13,6 +13,7 @@
 #include "Unit4.h"
 #include "Unit6.h"
 #include "Unit8.h"
+#include "Unit9.h"
 #include "ComObj.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -88,6 +89,7 @@ void ChangeDataSourceIsh(String DBName, String DBpath)
 void __fastcall TForm1::Label1Click(TObject *Sender)
 {
 	Form6->Close();
+    Form9->Close();
 	Form2->Parent = this;
 	Form2->SetBounds(3,3,300,150);
 	Form2->Align = alClient;
@@ -111,6 +113,7 @@ void __fastcall TForm1::Label1Click(TObject *Sender)
 void __fastcall TForm1::Label2Click(TObject *Sender)
 {
 	Form2->Close();
+    Form9->Close();
 	Form6->Parent = this;
 	Form6->SetBounds(3,3,300,150);
 	Form6->Align = alClient;
@@ -160,11 +163,22 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Label1->Font->Color = HexToColor("#e06214");
 	Label16->Font->Color = HexToColor("#e06214");
 	Label2->Font->Color = HexToColor("#e06214");
+    Label20->Font->Color = HexToColor("#e06214");
 
 
 	//-------------------- Для Combobox -------------------------------------
 	ComboBox1->Font->Color = HexToColor("#8c00ff");
 	ComboBox2->Font->Color = HexToColor("#8c00ff");
+
+
+	//------------------Проверка авторизации---------------------------------
+	Label19->Caption  = ini->ReadString("SETTINGUSER","User","not-authorized");
+
+	if(Label19->Caption == "not-authorized")
+	{
+		ShowMessage("Проверьте настройки, вы не авторизованы");
+        Application->Terminate();
+	}
 
 }
 //---------------------------------------------------------------------------
@@ -241,6 +255,36 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 			// Освобождаем ресурсы
 			FindClose(searchRec);
+			//---------------------Обращения--------------------------
+
+            // Очистка ComboBox перед добавлением новых элементов
+			ComboBox3->Clear();
+
+			 searchPath = ini->ReadString("SETTINGBASE","DBObrasheniya","") +"\\*.mdb"; // Путь к файлам
+
+			// Запуск поиска файлов
+			 result = FindFirst(searchPath, faArchive, searchRec);
+
+			// Проверяем, найдены ли файлы
+			if (result == 0) // Если файлы найдены
+			{
+				do {
+					// Добавляем имя файла (без пути) в ComboBox
+					ComboBox3->Items->Add(searchRec.Name);
+
+					// Переходим к следующему файлу
+					result = FindNext(searchRec);
+				} while (result == 0);
+
+			ComboBox3->ItemIndex = ComboBox3->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDBObr","2024.mdb"));
+			}
+			else // Если файлы не найдены
+			{
+				ShowMessage("Файлы с расширением .mdb не найдены Обращения ");
+			}
+
+			// Освобождаем ресурсы
+			FindClose(searchRec);
 
 
 }
@@ -250,6 +294,7 @@ void __fastcall TForm1::Label16Click(TObject *Sender)
 {
 	Form6->Close();
 	Form2->Close();
+    Form9->Close();
 }
 //---------------------------------------------------------------------------
 
@@ -325,4 +370,18 @@ void __fastcall TForm1::ComboBox2Change(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TForm1::Label20Click(TObject *Sender)
+{
+	Form2->Close();
+	Form6->Close();
+	Form9->Parent = this;
+	Form9->SetBounds(3,3,300,150);
+	Form9->Align = alClient;
+	Form9->BorderStyle = bsNone;
+	Form9->DBGrid1->Align = alClient;
+	Form9->DBGrid1->BorderStyle = bsNone;
+    Form9->Visible = true;
+}
+//---------------------------------------------------------------------------
 

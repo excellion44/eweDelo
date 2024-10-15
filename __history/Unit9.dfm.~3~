@@ -1,0 +1,71 @@
+object Form9: TForm9
+  Left = 0
+  Top = 0
+  Caption = 'Form9'
+  ClientHeight = 439
+  ClientWidth = 751
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Button1: TButton
+    Left = 328
+    Top = 406
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 751
+    Height = 65
+    Align = alTop
+    TabOrder = 1
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Top = 71
+    Width = 735
+    Height = 360
+    DrawingStyle = gdsGradient
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end>
+  end
+end

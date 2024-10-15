@@ -46,9 +46,9 @@ object Form8: TForm8
   object Label3: TLabel
     Left = 8
     Top = 125
-    Width = 37
+    Width = 136
     Height = 13
-    Caption = 'Label1'
+    Caption = #1055#1091#1090#1100' '#1082' '#1073#1072#1079#1077' '#1086#1073#1088#1072#1097#1077#1085#1080#1081
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -147,6 +147,7 @@ object Form8: TForm8
     Height = 23
     Caption = '...'
     TabOrder = 7
+    OnClick = Button3Click
   end
   object Button4: TButton
     Left = 423

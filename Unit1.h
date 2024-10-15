@@ -57,6 +57,10 @@ __published:	// IDE-managed Components
 	TComboBox *ComboBox2;
 	TLabel *Label18;
 	TEdit *Edit3;
+	TLabel *Label19;
+	TLabel *Label20;
+	TGroupBox *GroupBox3;
+	TComboBox *ComboBox3;
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
@@ -68,6 +72,7 @@ __published:	// IDE-managed Components
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall ComboBox1Change(TObject *Sender);
 	void __fastcall ComboBox2Change(TObject *Sender);
+	void __fastcall Label20Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

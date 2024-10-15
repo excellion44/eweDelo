@@ -134,6 +134,13 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label19: TLabel
+    Left = 1128
+    Top = 16
+    Width = 37
+    Height = 13
+    Caption = 'Label19'
+  end
   object CategoryPanelGroup1: TCategoryPanelGroup
     Left = 0
     Top = 0
@@ -250,7 +257,7 @@ object Form1: TForm1
       end
       object Label16: TLabel
         Left = 8
-        Top = 4
+        Top = 3
         Width = 48
         Height = 13
         Caption = #1043#1083#1072#1074#1085#1072#1103
@@ -262,11 +269,20 @@ object Form1: TForm1
         ParentFont = False
         OnClick = Label16Click
       end
+      object Label20: TLabel
+        Left = 8
+        Top = 61
+        Width = 66
+        Height = 13
+        Cursor = crHandPoint
+        Caption = #1054#1073#1088#1072#1097#1077#1085#1080#1103
+        OnClick = Label20Click
+      end
     end
   end
   object Button1: TButton
-    Left = 867
-    Top = 26
+    Left = 875
+    Top = 13
     Width = 75
     Height = 25
     Caption = 'Button1'
@@ -275,8 +291,8 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 904
-    Top = 57
+    Left = 912
+    Top = 44
     Width = 75
     Height = 25
     Caption = 'Button2'
@@ -408,6 +424,35 @@ object Form1: TForm1
     TabOrder = 8
     Text = 'Edit3'
     Visible = False
+  end
+  object GroupBox3: TGroupBox
+    Left = 703
+    Top = 172
+    Width = 202
+    Height = 109
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 9
+    object ComboBox3: TComboBox
+      Left = 11
+      Top = 48
+      Width = 174
+      Height = 24
+      Style = csDropDownList
+      Color = clMenu
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+    end
   end
   object PopupMenu1: TPopupMenu
     Left = 584

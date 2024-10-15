@@ -48,6 +48,7 @@ object Form2: TForm2
     Height = 391
     Align = alCustom
     DataSource = DataSource1
+    DrawingStyle = gdsGradient
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -148,6 +149,7 @@ object Form2: TForm2
         Color = cl3DLight
         Expanded = False
         FieldName = 'komu'
+        Title.Caption = #1050#1086#1084#1091
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
