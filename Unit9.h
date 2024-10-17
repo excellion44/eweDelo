@@ -12,6 +12,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Grids.hpp>
 #include <Vcl.Buttons.hpp>
+#include <Data.Win.ADODB.hpp>
 //---------------------------------------------------------------------------
 class TForm9 : public TForm
 {
@@ -22,7 +23,20 @@ __published:	// IDE-managed Components
 	TBitBtn *BitBtn3;
 	TBitBtn *BitBtn2;
 	TBitBtn *BitBtn1;
+	TADOConnection *ADOConnection1;
+	TADOQuery *ADOQuery1;
+	TDataSource *DataSource1;
+	TLabel *Label1;
+	TEdit *Edit1;
+	TEdit *Edit2;
+	TEdit *Edit3;
+	TEdit *Edit4;
+	TEdit *Edit5;
 	void __fastcall BitBtn1Click(TObject *Sender);
+	void __fastcall DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect, int DataCol,
+          TColumn *Column, TGridDrawState State);
+	void __fastcall BitBtn2Click(TObject *Sender);
+	void __fastcall DBGrid1DblClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);

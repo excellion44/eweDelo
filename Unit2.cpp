@@ -50,7 +50,7 @@ void __fastcall TForm2::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 				if (i  >= COL_DAY_RED && ADOQuery1->FieldByName("ispflag")->Value == 1)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
-						dbg->Canvas->Brush->Color = clRed;
+						dbg->Canvas->Brush->Color = clMaroon;
 						dbg->Canvas->FillRect(Rect);
 						dbg->Canvas->Font->Color = clWhite;
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);

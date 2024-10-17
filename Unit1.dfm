@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Cursor = crHandPoint
+  Cursor = crArrow
   Caption = 'EWE '#1044#1077#1083#1086#1087#1088#1086#1080#1079#1074#1086#1076#1089#1090#1074#1086
   ClientHeight = 643
   ClientWidth = 1267
@@ -57,11 +57,11 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 422
+    Left = 425
     Top = 104
-    Width = 128
+    Width = 157
     Height = 16
-    Caption = #1042#1089#1077#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074':'
+    Caption = #1042#1093#1086#1076#1103#1097#1080#1093' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -70,7 +70,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label7: TLabel
-    Left = 556
+    Left = 588
     Top = 104
     Width = 42
     Height = 16
@@ -140,6 +140,84 @@ object Form1: TForm1
     Width = 37
     Height = 13
     Caption = 'Label19'
+  end
+  object Label22: TLabel
+    Left = 425
+    Top = 139
+    Width = 80
+    Height = 16
+    Caption = #1054#1073#1088#1072#1097#1077#1085#1080#1081':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label23: TLabel
+    Left = 580
+    Top = 139
+    Width = 50
+    Height = 16
+    Caption = 'Label23'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3487178
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label24: TLabel
+    Left = 656
+    Top = 139
+    Width = 103
+    Height = 16
+    Caption = #1053#1072' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1080':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label25: TLabel
+    Left = 765
+    Top = 139
+    Width = 50
+    Height = 16
+    Caption = 'Label25'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3487178
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label26: TLabel
+    Left = 856
+    Top = 139
+    Width = 86
+    Height = 16
+    Caption = #1055#1088#1086#1089#1088#1086#1095#1077#1085#1086':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label27: TLabel
+    Left = 948
+    Top = 139
+    Width = 50
+    Height = 16
+    Caption = 'Label27'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 3487178
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object CategoryPanelGroup1: TCategoryPanelGroup
     Left = 0
@@ -329,8 +407,8 @@ object Form1: TForm1
     Visible = False
   end
   object GroupBox1: TGroupBox
-    Left = 191
-    Top = 172
+    Left = 343
+    Top = 210
     Width = 202
     Height = 109
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1042#1061#1054#1044#1071#1065#1048#1045
@@ -374,8 +452,8 @@ object Form1: TForm1
     end
   end
   object GroupBox2: TGroupBox
-    Left = 447
-    Top = 172
+    Left = 599
+    Top = 210
     Width = 202
     Height = 109
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1080#1089#1093#1086#1076#1103#1097#1080#1077
@@ -418,7 +496,7 @@ object Form1: TForm1
   end
   object Edit3: TEdit
     Left = 202
-    Top = 318
+    Top = 510
     Width = 815
     Height = 21
     TabOrder = 8
@@ -426,8 +504,8 @@ object Form1: TForm1
     Visible = False
   end
   object GroupBox3: TGroupBox
-    Left = 703
-    Top = 172
+    Left = 855
+    Top = 210
     Width = 202
     Height = 109
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
@@ -438,6 +516,13 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 9
+    object Label21: TLabel
+      Left = 12
+      Top = 29
+      Width = 88
+      Height = 13
+      Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1073#1072#1079#1091
+    end
     object ComboBox3: TComboBox
       Left = 11
       Top = 48
@@ -2593,8 +2678,8 @@ object Form1: TForm1
     Top = 56
   end
   object MainMenu1: TMainMenu
-    Left = 768
-    Top = 384
+    Left = 800
+    Top = 64
     object N1: TMenuItem
       Caption = #1060#1072#1081#1083
     end

@@ -84,6 +84,31 @@ void ChangeDataSourceIsh(String DBName, String DBpath)
 	 Form6->ADOConnection1->Open();
 	  //Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
 }
+//---------------------------------------------------------------------------
+void ChangeDataSourceObr(String DBName, String DBpath)
+{
+	 Form9->ADOConnection1->Close();
+
+	// Сохраняем текущую строку подключения
+	String currentConnectionString = Form9->ADOConnection1->ConnectionString;
+
+	// Новый источник данных
+	String newDataSource = DBpath + "\\" + DBName;
+
+
+
+	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
+
+
+	// Собираем строку подключения обратно
+	Form9->ADOConnection1->ConnectionString = newConnectionString;
+	//Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
+
+
+	// Вы можете открыть соединение, если это необходимо
+	 Form9->ADOConnection1->Open();
+	  //Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
+}
 
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Label1Click(TObject *Sender)
@@ -167,14 +192,14 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 
 
 	//-------------------- Для Combobox -------------------------------------
-	ComboBox1->Font->Color = HexToColor("#8c00ff");
-	ComboBox2->Font->Color = HexToColor("#8c00ff");
+	//ComboBox1->Font->Color = HexToColor("#8c00ff");
+   //	ComboBox2->Font->Color = HexToColor("#8c00ff");
 
 
 	//------------------Проверка авторизации---------------------------------
 	Label19->Caption  = ini->ReadString("SETTINGUSER","User","not-authorized");
 
-	if(Label19->Caption == "not-authorized")
+	if(Label19->Caption == "not-authorized" || Label19->Caption == "" )
 	{
 		ShowMessage("Проверьте настройки, вы не авторизованы");
         Application->Terminate();
@@ -381,7 +406,25 @@ void __fastcall TForm1::Label20Click(TObject *Sender)
 	Form9->BorderStyle = bsNone;
 	Form9->DBGrid1->Align = alClient;
 	Form9->DBGrid1->BorderStyle = bsNone;
+	ChangeDataSourceObr(ComboBox3->Text, ini->ReadString("SETTINGBASE","DBObrasheniya",""));
+
+	if(Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+	else
+	{
+        Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+
+
+
     Form9->Visible = true;
 }
 //---------------------------------------------------------------------------
+
 

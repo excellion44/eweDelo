@@ -22,7 +22,19 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 751
+    object Label1: TLabel
+      Left = 556
+      Top = 7
+      Width = 38
+      Height = 13
+      Caption = #1055#1054#1048#1057#1050
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object BitBtn4: TBitBtn
       Left = 188
       Top = 14
@@ -598,6 +610,7 @@ object Form9: TForm9
         E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7E8E7E7
         E8E7E7E8E7E7E8E9E9E9}
       TabOrder = 2
+      OnClick = BitBtn2Click
     end
     object BitBtn1: TBitBtn
       Left = 8
@@ -792,22 +805,87 @@ object Form9: TForm9
       TabOrder = 3
       OnClick = BitBtn1Click
     end
+    object Edit1: TEdit
+      Left = 384
+      Top = 30
+      Width = 121
+      Height = 21
+      TabOrder = 4
+      TextHint = #1060#1048#1054
+    end
+    object Edit2: TEdit
+      Left = 528
+      Top = 30
+      Width = 121
+      Height = 21
+      TabOrder = 5
+      TextHint = #1040#1076#1088#1077#1089
+    end
+    object Edit3: TEdit
+      Left = 672
+      Top = 30
+      Width = 177
+      Height = 21
+      TabOrder = 6
+      TextHint = #1057#1091#1090#1100' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
+    end
+    object Edit4: TEdit
+      Left = 384
+      Top = 57
+      Width = 121
+      Height = 21
+      TabOrder = 7
+      TextHint = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+    end
+    object Edit5: TEdit
+      Left = 528
+      Top = 57
+      Width = 121
+      Height = 21
+      TabOrder = 8
+      TextHint = #1080#1089#1093'. '#1053#1086#1084#1077#1088
+    end
   end
   object DBGrid1: TDBGrid
     Left = 8
     Top = 112
     Width = 1067
     Height = 201
+    Color = clMenu
+    Ctl3D = True
+    DataSource = DataSource1
     DrawingStyle = gdsGradient
+    GradientEndColor = clMoneyGreen
+    GradientStartColor = clSilver
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentCtl3D = False
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDrawColumnCell = DBGrid1DrawColumnCell
+    OnDblClick = DBGrid1DblClick
     Columns = <
       item
         Expanded = False
+        FieldName = 'number'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'data'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Title.Alignment = taCenter
         Title.Caption = #1044#1072#1090#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103
         Title.Font.Charset = DEFAULT_CHARSET
@@ -815,11 +893,17 @@ object Form9: TForm9
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 117
+        Width = 119
         Visible = True
       end
       item
         Expanded = False
+        FieldName = 'fio'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Title.Alignment = taCenter
         Title.Caption = #1060#1048#1054
         Title.Font.Charset = DEFAULT_CHARSET
@@ -827,11 +911,52 @@ object Form9: TForm9
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 288
+        Width = 231
         Visible = True
       end
       item
         Expanded = False
+        FieldName = 'adres'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Title.Alignment = taCenter
+        Title.Caption = #1040#1076#1088#1077#1089' '#1079#1072#1103#1074#1080#1090#1077#1083#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 326
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tema'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Title.Caption = #1057#1091#1090#1100' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 211
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'isp'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Title.Alignment = taCenter
         Title.Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
         Title.Font.Charset = DEFAULT_CHARSET
@@ -844,18 +969,12 @@ object Form9: TForm9
       end
       item
         Expanded = False
-        Title.Alignment = taCenter
-        Title.Caption = #1040#1076#1088#1077#1089' '#1079#1072#1103#1074#1080#1090#1077#1083#1103
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -11
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 428
-        Visible = True
-      end
-      item
-        Expanded = False
+        FieldName = 'ishn'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         Title.Alignment = taCenter
         Title.Caption = #1048#1089#1093'.'#8470
         Title.Font.Charset = DEFAULT_CHARSET
@@ -865,16 +984,33 @@ object Form9: TForm9
         Title.Font.Style = [fsBold]
         Width = 177
         Visible = True
-      end
-      item
-        Expanded = False
-        Title.Alignment = taCenter
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -11
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Visible = True
       end>
+  end
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source=doc20' +
+      '22.mdb;Mode=Share Deny None;Persist Security Info=False;Jet OLED' +
+      'B:System database="";Jet OLEDB:Registry Path="";Jet OLEDB:Databa' +
+      'se Password="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Lockin' +
+      'g Mode=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bu' +
+      'lk Transactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:C' +
+      'reate System Database=False;Jet OLEDB:Encrypt Database=False;Jet' +
+      ' OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact With' +
+      'out Replica Repair=False;Jet OLEDB:SFP=False;'
+    LoginPrompt = False
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 464
+    Top = 408
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 544
+    Top = 400
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 656
+    Top = 392
   end
 end

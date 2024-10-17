@@ -123,7 +123,7 @@ object Form2: TForm2
         Color = cl3DLight
         Expanded = False
         FieldName = 'ish'
-        Title.Caption = #1048#1089#1093#1086#1076#1103#1097#1080#1081
+        Title.Caption = #1048#1089#1090#1086#1095#1085#1080#1082
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
@@ -1278,7 +1278,7 @@ object Form2: TForm2
       Width = 94
       Height = 21
       TabOrder = 12
-      TextHint = #1048#1089#1093#1086#1076#1103#1097#1080#1081' '#8470
+      TextHint = #1048#1089#1090#1086#1095#1085#1080#1082
       OnKeyUp = SearchIshKeyUp
     end
     object Edit3: TEdit

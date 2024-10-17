@@ -61,6 +61,13 @@ __published:	// IDE-managed Components
 	TLabel *Label20;
 	TGroupBox *GroupBox3;
 	TComboBox *ComboBox3;
+	TLabel *Label21;
+	TLabel *Label22;
+	TLabel *Label23;
+	TLabel *Label24;
+	TLabel *Label25;
+	TLabel *Label26;
+	TLabel *Label27;
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
