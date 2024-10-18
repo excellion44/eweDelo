@@ -812,6 +812,7 @@ object Form9: TForm9
       Height = 21
       TabOrder = 4
       TextHint = #1060#1048#1054
+      OnKeyUp = Edit1KeyUp
     end
     object Edit2: TEdit
       Left = 528
@@ -820,6 +821,7 @@ object Form9: TForm9
       Height = 21
       TabOrder = 5
       TextHint = #1040#1076#1088#1077#1089
+      OnKeyUp = Edit2KeyUp
     end
     object Edit3: TEdit
       Left = 672
@@ -828,6 +830,7 @@ object Form9: TForm9
       Height = 21
       TabOrder = 6
       TextHint = #1057#1091#1090#1100' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
+      OnKeyUp = Edit3KeyUp
     end
     object Edit4: TEdit
       Left = 384
@@ -836,6 +839,7 @@ object Form9: TForm9
       Height = 21
       TabOrder = 7
       TextHint = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+      OnKeyUp = Edit4KeyUp
     end
     object Edit5: TEdit
       Left = 528
@@ -844,6 +848,7 @@ object Form9: TForm9
       Height = 21
       TabOrder = 8
       TextHint = #1080#1089#1093'. '#1053#1086#1084#1077#1088
+      OnKeyUp = Edit5KeyUp
     end
   end
   object DBGrid1: TDBGrid

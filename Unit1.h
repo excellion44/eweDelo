@@ -68,6 +68,7 @@ __published:	// IDE-managed Components
 	TLabel *Label25;
 	TLabel *Label26;
 	TLabel *Label27;
+	TMenuItem *IT1;
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
@@ -80,6 +81,7 @@ __published:	// IDE-managed Components
 	void __fastcall ComboBox1Change(TObject *Sender);
 	void __fastcall ComboBox2Change(TObject *Sender);
 	void __fastcall Label20Click(TObject *Sender);
+	void __fastcall IT1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

@@ -428,3 +428,12 @@ void __fastcall TForm1::Label20Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+void __fastcall TForm1::IT1Click(TObject *Sender)
+{
+			char* OpenFileName;
+			AnsiString  f = "EWESetting.ini";
+			OpenFileName = f.c_str();
+			ShellExecuteA(Handle, "open", OpenFileName, NULL, NULL, SW_SHOWNORMAL);
+}
+//---------------------------------------------------------------------------
+

@@ -5,7 +5,7 @@ object Form1: TForm1
   Caption = 'EWE '#1044#1077#1083#1086#1087#1088#1086#1080#1079#1074#1086#1076#1089#1090#1074#1086
   ClientHeight = 643
   ClientWidth = 1267
-  Color = clBtnFace
+  Color = clMenu
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -2688,6 +2688,10 @@ object Form1: TForm1
       object N3: TMenuItem
         Caption = #1041#1072#1079#1099
         OnClick = N3Click
+      end
+      object IT1: TMenuItem
+        Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1077' ('#1076#1083#1103' IT)'
+        OnClick = IT1Click
       end
     end
   end

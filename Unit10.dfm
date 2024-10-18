@@ -13,19 +13,36 @@ object Form10: TForm10
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object ADD_OR_EDIT: TLabel
-    Left = 312
-    Top = 8
+    Left = 623
+    Top = 319
     Width = 71
     Height = 13
     Caption = 'ADD_OR_EDIT'
     Visible = False
   end
+  object FilePatch: TLabel
+    Left = 494
+    Top = 319
+    Width = 43
+    Height = 13
+    Caption = 'FilePatch'
+    Visible = False
+  end
+  object ID: TLabel
+    Left = 719
+    Top = 319
+    Width = 11
+    Height = 13
+    Caption = 'ID'
+    Visible = False
+  end
   object Image1: TImage
     Left = 8
-    Top = 311
+    Top = 352
     Width = 49
     Height = 58
     Cursor = crHandPoint
@@ -118,39 +135,115 @@ object Form10: TForm10
   end
   object FileName: TLabel
     Left = 63
-    Top = 336
+    Top = 372
     Width = 51
     Height = 13
     Cursor = crHandPoint
     Caption = 'FileName'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clTeal
+    Font.Color = clBlack
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object FilePatch: TLabel
-    Left = 273
-    Top = 59
-    Width = 43
+  object Label1: TLabel
+    Left = 65
+    Top = 13
+    Width = 25
     Height = 13
-    Caption = 'FilePatch'
-    Visible = False
+    Caption = #1060#1048#1054
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
-  object ID: TLabel
-    Left = 608
-    Top = 59
-    Width = 11
+  object Label2: TLabel
+    Left = 352
+    Top = 13
+    Width = 109
     Height = 13
-    Caption = 'ID'
-    Visible = False
+    Caption = #1044#1072#1090#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 483
+    Top = 13
+    Width = 76
+    Height = 13
+    Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 10
+    Top = 61
+    Width = 37
+    Height = 13
+    Caption = #1040#1076#1088#1077#1089
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Top = 111
+    Width = 96
+    Height = 13
+    Caption = #1057#1091#1090#1100' '#1086#1073#1088#1072#1097#1077#1085#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 8
+    Top = 155
+    Width = 70
+    Height = 13
+    Caption = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label7: TLabel
+    Left = 5
+    Top = 334
+    Width = 67
+    Height = 13
+    Caption = #1060#1072#1081#1083' '#1086#1090#1074#1077#1090
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object FIO: TEdit
-    Left = 89
+    Left = 63
     Top = 32
-    Width = 257
-    Height = 21
+    Width = 283
+    Height = 23
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -164,9 +257,10 @@ object Form10: TForm10
     Left = 352
     Top = 32
     Width = 123
-    Height = 21
+    Height = 23
     Date = 44674.000000000000000000
     Time = 0.906391238422656900
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -179,7 +273,8 @@ object Form10: TForm10
     Left = 8
     Top = 80
     Width = 746
-    Height = 21
+    Height = 23
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -191,9 +286,10 @@ object Form10: TForm10
   end
   object TEMA: TEdit
     Left = 8
-    Top = 120
+    Top = 126
     Width = 746
-    Height = 21
+    Height = 23
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -208,6 +304,7 @@ object Form10: TForm10
     Top = 32
     Width = 153
     Height = 21
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -219,9 +316,10 @@ object Form10: TForm10
   end
   object Memo1: TMemo
     Left = 8
-    Top = 160
+    Top = 173
     Width = 746
     Height = 145
+    Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -265,8 +363,10 @@ object Form10: TForm10
   object number: TEdit
     Left = 8
     Top = 32
-    Width = 75
-    Height = 21
+    Width = 49
+    Height = 23
+    Color = clMenu
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -277,7 +377,7 @@ object Form10: TForm10
     Text = 'number'
   end
   object OpenDialog1: TOpenDialog
-    Left = 72
-    Top = 376
+    Left = 712
+    Top = 384
   end
 end

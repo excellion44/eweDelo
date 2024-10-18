@@ -37,6 +37,11 @@ __published:	// IDE-managed Components
           TColumn *Column, TGridDrawState State);
 	void __fastcall BitBtn2Click(TObject *Sender);
 	void __fastcall DBGrid1DblClick(TObject *Sender);
+	void __fastcall Edit1KeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Edit2KeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Edit3KeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Edit4KeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall Edit5KeyUp(TObject *Sender, WORD &Key, TShiftState Shift);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);
