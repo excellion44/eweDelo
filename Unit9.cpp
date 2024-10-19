@@ -6,10 +6,12 @@
 #include "Unit9.h"
 #include "Unit10.h"
 #include "Unit1.h"
+#include "IniFiles.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm9 *Form9;
+TIniFile *ini = new TIniFile (ExtractFilePath(ParamStr(0))+"EWEsetting.ini");
 //---------------------------------------------------------------------------
 __fastcall TForm9::TForm9(TComponent* Owner)
 	: TForm(Owner)
@@ -63,7 +65,7 @@ void __fastcall TForm9::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 				if (i  >= COL_DAY_YEL && i <= 24 && ADOQuery1->FieldByName("flag")->Value == 0)
 				{
 						TDBGrid *dbg = (TDBGrid*)Sender;
-						dbg->Canvas->Brush->Color = HexToColor("#DDDB53");
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColDayYel","#DDDB53"));
 						dbg->Canvas->FillRect(Rect);
 						dbg->Canvas->Font->Color = clBlack;
                         dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
@@ -72,16 +74,25 @@ void __fastcall TForm9::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 				if (i  >= COL_DAY_RED && ADOQuery1->FieldByName("flag")->Value == 0)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
-						dbg->Canvas->Brush->Color = HexToColor("#D94545");
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColDayRed","#D94545"));
 						dbg->Canvas->FillRect(Rect);
 						dbg->Canvas->Font->Color = clWhite;
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
 				}
-
+				//если дан промежуточный ответ
 				if (ADOQuery1->FieldByName("flag")->Value == 1)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
-						dbg->Canvas->Brush->Color = HexToColor("#32E19A");
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColFlag","#D5F5E3"));
+						dbg->Canvas->FillRect(Rect);
+						dbg->Canvas->Font->Color = clBlack;
+						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
+				}
+				//если обращение закрыто
+				if (ADOQuery1->FieldByName("ishn")->Value != "")
+                {
+						TDBGrid *dbg = (TDBGrid*)Sender;
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColIspTrue","#32E19A"));
 						dbg->Canvas->FillRect(Rect);
 						dbg->Canvas->Font->Color = clBlack;
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
@@ -256,6 +267,126 @@ void __fastcall TForm9::Edit5KeyUp(TObject *Sender, WORD &Key, TShiftState Shift
 					Form9->ADOQuery1->Active = true;
 				}
 		}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::BitBtn3Click(TObject *Sender)
+{
+    if(MessageDlg("Действительно хотите удалить запись?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
+	{
+		String DELETED = ADOQuery1->FieldByName("number")->Value;
+
+		ADOQuery1->SQL->Text = "DELETE FROM obr WHERE number IN ("+DELETED+") ";
+		ADOQuery1->ExecSQL();
+
+		if(Form1->Label19->Caption == "ОБЩИЙ")
+		{
+			Form9->ADOQuery1->Active = false;
+			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+			Form9->ADOQuery1->Active = true;
+		}
+		else
+		{
+			Form9->ADOQuery1->Active = false;
+			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+			Form9->ADOQuery1->Active = true;
+		}
+
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N3Click(TObject *Sender)
+{
+    BitBtn3->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N1Click(TObject *Sender)
+{
+    BitBtn2->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Image1Click(TObject *Sender)
+{
+			if(OpenDialog1->Execute())
+			{
+				FilePatch->Caption = OpenDialog1->FileName;
+				FileName->Caption = ExtractFileName(OpenDialog1->FileName);
+			}
+			else
+			{
+
+			}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button1Click(TObject *Sender)
+{
+
+		 if(FilePatch->Caption !="FilePatch")
+		 {
+			 Form9->ADOQuery1->SQL->Text = "UPDATE obr SET  file =:BlobValue, file_name = :file_name, flag = :flag, ishn = :ishn WHERE number IN (:id)";
+			 Form9->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
+			 Form9->ADOQuery1->Parameters->ParamByName("file_name")->Value = FileName->Caption;
+			 Form9->ADOQuery1->Parameters->ParamByName("flag")->Value = "2";
+			 Form9->ADOQuery1->Parameters->ParamByName("ishn")->Value = ISHN->Text;
+			 Form9->ADOQuery1->Parameters->ParamByName("id")->Value = ID->Caption;
+			 Form9->ADOQuery1->ExecSQL();
+
+				if(Form1->Label19->Caption == "ОБЩИЙ")
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+
+				}
+				else
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+				}
+
+                Panel2->Visible = false;
+		 }
+		 else
+		 {
+				ShowMessage("Вы не прикрепили ответ!");
+		 }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::BitBtn5Click(TObject *Sender)
+{
+	ID->Caption = ADOQuery1->FieldByName("number")->Value;
+    Panel2->Visible = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N2Click(TObject *Sender)
+{
+    BitBtn5->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton3Click(TObject *Sender)
+{
+				if(Form1->Label19->Caption == "ОБЩИЙ")
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+
+				}
+				else
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+				}
+
 }
 //---------------------------------------------------------------------------
 
