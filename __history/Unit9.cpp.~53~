@@ -296,3 +296,97 @@ void __fastcall TForm9::BitBtn3Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm9::N3Click(TObject *Sender)
+{
+    BitBtn3->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N1Click(TObject *Sender)
+{
+    BitBtn2->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Image1Click(TObject *Sender)
+{
+			if(OpenDialog1->Execute())
+			{
+				FilePatch->Caption = OpenDialog1->FileName;
+				FileName->Caption = ExtractFileName(OpenDialog1->FileName);
+			}
+			else
+			{
+
+			}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button1Click(TObject *Sender)
+{
+
+		 if(FilePatch->Caption !="FilePatch")
+		 {
+			 Form9->ADOQuery1->SQL->Text = "UPDATE obr SET  file =:BlobValue, file_name = :file_name, flag = :flag, ishn = :ishn WHERE number IN (:id)";
+			 Form9->ADOQuery1->Parameters->ParamByName("BlobValue")->LoadFromFile(FilePatch->Caption,ftBlob);
+			 Form9->ADOQuery1->Parameters->ParamByName("file_name")->Value = FileName->Caption;
+			 Form9->ADOQuery1->Parameters->ParamByName("flag")->Value = "2";
+			 Form9->ADOQuery1->Parameters->ParamByName("ishn")->Value = ISHN->Text;
+			 Form9->ADOQuery1->Parameters->ParamByName("id")->Value = ID->Caption;
+			 Form9->ADOQuery1->ExecSQL();
+
+				if(Form1->Label19->Caption == "ÎÁÙÈÉ")
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+
+				}
+				else
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+				}
+
+                Panel2->Visible = false;
+		 }
+		 else
+		 {
+				ShowMessage("Âû íå ïðèêðåïèëè îòâåò!");
+		 }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::BitBtn5Click(TObject *Sender)
+{
+	ID->Caption = ADOQuery1->FieldByName("number")->Value;
+    Panel2->Visible = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N2Click(TObject *Sender)
+{
+    BitBtn5->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton3Click(TObject *Sender)
+{
+				if(Form1->Label19->Caption == "ÎÁÙÈÉ")
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+
+				}
+				else
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+				}
+
+}
+//---------------------------------------------------------------------------
+

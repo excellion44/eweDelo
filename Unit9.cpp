@@ -360,6 +360,16 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 
 void __fastcall TForm9::BitBtn5Click(TObject *Sender)
 {
+
+	int FLAG = ADOQuery1->FieldByName("flag")->Value;
+
+	if(FLAG == 2)
+	{
+		ShowMessage("Данная запись уже исполнена");
+        return;
+	}
+	ISHN->Clear();
+    FilePatch->Caption = "FilePatch";
 	ID->Caption = ADOQuery1->FieldByName("number")->Value;
     Panel2->Visible = true;
 }
@@ -387,6 +397,12 @@ void __fastcall TForm9::RadioButton3Click(TObject *Sender)
 					Form9->ADOQuery1->Active = true;
 				}
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button2Click(TObject *Sender)
+{
+    Panel2->Visible = false;
 }
 //---------------------------------------------------------------------------
 

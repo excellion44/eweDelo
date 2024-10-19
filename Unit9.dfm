@@ -1428,6 +1428,7 @@ object Form9: TForm9
       Height = 25
       Caption = #1054#1090#1084#1077#1085#1072
       TabOrder = 1
+      OnClick = Button2Click
     end
     object ISHN: TEdit
       Left = 24
