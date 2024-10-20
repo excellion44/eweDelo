@@ -348,6 +348,8 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 					Form9->ADOQuery1->Active = true;
 				}
+
+                Panel2->Visible = false;
 		 }
 		 else
 		 {
@@ -358,8 +360,50 @@ void __fastcall TForm9::Button1Click(TObject *Sender)
 
 void __fastcall TForm9::BitBtn5Click(TObject *Sender)
 {
+
+	int FLAG = ADOQuery1->FieldByName("flag")->Value;
+
+	if(FLAG == 2)
+	{
+		ShowMessage("Данная запись уже исполнена");
+        return;
+	}
+	ISHN->Clear();
+    FilePatch->Caption = "FilePatch";
 	ID->Caption = ADOQuery1->FieldByName("number")->Value;
+    HexToColor(ini->ReadString("COLORSETTING","Panel2ColIsp","#32E19A"))
     Panel2->Visible = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::N2Click(TObject *Sender)
+{
+    BitBtn5->Click();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton3Click(TObject *Sender)
+{
+				if(Form1->Label19->Caption == "ОБЩИЙ")
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+
+				}
+				else
+				{
+					Form9->ADOQuery1->Active = false;
+					Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+					Form9->ADOQuery1->Active = true;
+				}
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button2Click(TObject *Sender)
+{
+    Panel2->Visible = false;
 }
 //---------------------------------------------------------------------------
 

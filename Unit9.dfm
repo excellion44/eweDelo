@@ -22,8 +22,6 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 17
     object Label1: TLabel
       Left = 638
       Top = 7
@@ -866,6 +864,7 @@ object Form9: TForm9
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 9
+      OnClick = RadioButton1Click
     end
     object RadioButton2: TRadioButton
       Left = 328
@@ -880,6 +879,7 @@ object Form9: TForm9
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 10
+      OnClick = RadioButton2Click
     end
     object RadioButton3: TRadioButton
       Left = 328
@@ -909,6 +909,7 @@ object Form9: TForm9
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 12
+      OnClick = RadioButton4Click
     end
   end
   object DBGrid1: TDBGrid
@@ -1261,6 +1262,8 @@ object Form9: TForm9
     Top = 176
     Width = 337
     Height = 209
+    Color = clMoneyGreen
+    ParentBackground = False
     TabOrder = 3
     Visible = False
     object Image1: TImage

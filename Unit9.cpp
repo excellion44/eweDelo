@@ -371,7 +371,19 @@ void __fastcall TForm9::BitBtn5Click(TObject *Sender)
 	ISHN->Clear();
     FilePatch->Caption = "FilePatch";
 	ID->Caption = ADOQuery1->FieldByName("number")->Value;
-    Panel2->Visible = true;
+    Form9->Panel2->Color = HexToColor(ini->ReadString("COLORSETTING","Panel2ColIsp","#DDDB53"));
+    // Устанавливаем Panel1 видимым
+	 Panel2->Visible = true;
+
+    // Вычисляем размеры и позиции для центрирования
+	int panelWidth = Panel2->Width;
+	int panelHeight = Panel2->Height;
+
+	// Центрирование по X
+	Panel2->Left = (ClientWidth - panelWidth) / 2;
+
+    // Центрирование по Y
+	Panel2->Top = (ClientHeight - panelHeight) / 2;
 }
 //---------------------------------------------------------------------------
 
@@ -403,6 +415,57 @@ void __fastcall TForm9::RadioButton3Click(TObject *Sender)
 void __fastcall TForm9::Button2Click(TObject *Sender)
 {
     Panel2->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton4Click(TObject *Sender)
+{
+	if(Form1->Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton1Click(TObject *Sender)
+{
+    if(Form1->Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::RadioButton2Click(TObject *Sender)
+{
+	if(Form1->Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr where flag =1 ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE flag =1 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
 }
 //---------------------------------------------------------------------------
 

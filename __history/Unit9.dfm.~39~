@@ -22,10 +22,8 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 8
     object Label1: TLabel
-      Left = 556
+      Left = 638
       Top = 7
       Width = 38
       Height = 13
@@ -809,7 +807,7 @@ object Form9: TForm9
       OnClick = BitBtn1Click
     end
     object Edit1: TEdit
-      Left = 384
+      Left = 466
       Top = 30
       Width = 121
       Height = 21
@@ -818,7 +816,7 @@ object Form9: TForm9
       OnKeyUp = Edit1KeyUp
     end
     object Edit2: TEdit
-      Left = 528
+      Left = 610
       Top = 30
       Width = 121
       Height = 21
@@ -827,7 +825,7 @@ object Form9: TForm9
       OnKeyUp = Edit2KeyUp
     end
     object Edit3: TEdit
-      Left = 672
+      Left = 754
       Top = 30
       Width = 177
       Height = 21
@@ -836,7 +834,7 @@ object Form9: TForm9
       OnKeyUp = Edit3KeyUp
     end
     object Edit4: TEdit
-      Left = 384
+      Left = 466
       Top = 57
       Width = 121
       Height = 21
@@ -845,13 +843,70 @@ object Form9: TForm9
       OnKeyUp = Edit4KeyUp
     end
     object Edit5: TEdit
-      Left = 528
+      Left = 610
       Top = 57
       Width = 121
       Height = 21
       TabOrder = 8
       TextHint = #1080#1089#1093'. '#1053#1086#1084#1077#1088
       OnKeyUp = Edit5KeyUp
+    end
+    object RadioButton1: TRadioButton
+      Left = 328
+      Top = 22
+      Width = 113
+      Height = 17
+      Caption = #1055#1088#1086#1089#1088#1086#1095#1077#1085#1086
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 9
+    end
+    object RadioButton2: TRadioButton
+      Left = 328
+      Top = 41
+      Width = 113
+      Height = 17
+      Caption = #1044#1072#1085' '#1087#1088#1086#1084'. '#1086#1090#1074#1077#1090
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 10
+    end
+    object RadioButton3: TRadioButton
+      Left = 328
+      Top = 61
+      Width = 113
+      Height = 17
+      Caption = #1048#1089#1090#1077#1082#1072#1077#1090' '#1089#1088#1086#1082
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 11
+      OnClick = RadioButton3Click
+    end
+    object RadioButton4: TRadioButton
+      Left = 328
+      Top = 4
+      Width = 113
+      Height = 17
+      Caption = #1042#1089#1077
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 12
     end
   end
   object DBGrid1: TDBGrid
@@ -867,6 +922,7 @@ object Form9: TForm9
     GradientStartColor = clSilver
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     ParentCtl3D = False
+    PopupMenu = PopupMenu1
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -884,6 +940,13 @@ object Form9: TForm9
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
+        Title.Caption = #8470
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 54
         Visible = True
       end
       item
@@ -1189,6 +1252,7 @@ object Form9: TForm9
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
+    OnClick = BitBtn5Click
   end
   object Panel2: TPanel
     Left = 352
@@ -1196,6 +1260,7 @@ object Form9: TForm9
     Width = 337
     Height = 209
     TabOrder = 3
+    Visible = False
     object Image1: TImage
       Left = 136
       Top = 72
@@ -1337,6 +1402,14 @@ object Form9: TForm9
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object ID: TLabel
+      Left = 158
+      Top = 191
+      Width = 11
+      Height = 13
+      Caption = 'ID'
+      Visible = False
+    end
     object Button1: TButton
       Left = 24
       Top = 168
@@ -1353,6 +1426,7 @@ object Form9: TForm9
       Height = 25
       Caption = #1054#1090#1084#1077#1085#1072
       TabOrder = 1
+      OnClick = Button2Click
     end
     object ISHN: TEdit
       Left = 24
@@ -1404,6 +1478,7 @@ object Form9: TForm9
     end
     object N2: TMenuItem
       Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1100
+      OnClick = N2Click
     end
     object N3: TMenuItem
       Caption = #1059#1076#1072#1083#1080#1090#1100
