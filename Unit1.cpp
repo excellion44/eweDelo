@@ -203,7 +203,6 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label23->Caption = Form9->ADOQuery1->RecordCount;
-		ShowMessage("1");
 	}
 	else
 	{
@@ -211,7 +210,6 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label23->Caption = Form9->ADOQuery1->RecordCount;
-        ShowMessage("2");
 	}
 
 	//Истек срок
