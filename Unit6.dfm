@@ -23,7 +23,7 @@ object Form6: TForm6
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Book Antiqua'
-    Font.Style = []
+    Font.Style = [fsBold]
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
     TabOrder = 0

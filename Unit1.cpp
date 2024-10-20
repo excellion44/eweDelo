@@ -165,6 +165,17 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 {
 	ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
 	ChangeDataSourceIsh(ini->ReadString("SETTINGBASE","DefaultDBIsh",""), ini->ReadString("SETTINGBASE","DBIsh",""));
+	ChangeDataSourceObr(ini->ReadString("SETTINGBASE","DefaultDBObr",""), ini->ReadString("SETTINGBASE","DBObrasheniya",""));
+    //------------------Проверка авторизации---------------------------------
+	Label19->Caption  = ini->ReadString("SETTINGUSER","User","not-authorized");
+
+	if(Label19->Caption == "not-authorized" || Label19->Caption == "" )
+	{
+		ShowMessage("Проверьте настройки, вы не авторизованы");
+        Application->Terminate();
+	}
+    //-------------------------------------------------------------------------
+	Button1->Click();
 
 	Label5->Caption = DateToStr(Date())+" "+Time();
 
@@ -184,7 +195,63 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Form2->ADOQuery1->SQL->Text = "SELECT * FROM vhod where dateisp < NOW() AND ispflag = 1 ORDER BY number";
 	Form2->ADOQuery1->Active = true;
 	Label11->Caption = Form2->ADOQuery1->RecordCount;
-	Button1->Click();
+
+    //Все обращения
+	if(Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		Label23->Caption = Form9->ADOQuery1->RecordCount;
+		ShowMessage("1");
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		Label23->Caption = Form9->ADOQuery1->RecordCount;
+        ShowMessage("2");
+	}
+
+	//Истек срок
+	if(Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		Label27->Caption = Form9->ADOQuery1->RecordCount;
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		Label27->Caption = Form9->ADOQuery1->RecordCount;
+	}
+
+	//Истекает срок
+	if(Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		Label25->Caption = Form9->ADOQuery1->RecordCount;
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+        Label25->Caption = Form9->ADOQuery1->RecordCount;
+	}
+
+
+
+
+
+
+
 	Label1->Font->Color = HexToColor("#e06214");
 	Label16->Font->Color = HexToColor("#e06214");
 	Label2->Font->Color = HexToColor("#e06214");
@@ -196,14 +263,7 @@ void __fastcall TForm1::FormShow(TObject *Sender)
    //	ComboBox2->Font->Color = HexToColor("#8c00ff");
 
 
-	//------------------Проверка авторизации---------------------------------
-	Label19->Caption  = ini->ReadString("SETTINGUSER","User","not-authorized");
 
-	if(Label19->Caption == "not-authorized" || Label19->Caption == "" )
-	{
-		ShowMessage("Проверьте настройки, вы не авторизованы");
-        Application->Terminate();
-	}
 
 }
 //---------------------------------------------------------------------------

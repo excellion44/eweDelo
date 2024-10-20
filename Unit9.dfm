@@ -898,7 +898,7 @@ object Form9: TForm9
     end
     object RadioButton4: TRadioButton
       Left = 328
-      Top = 4
+      Top = 2
       Width = 113
       Height = 17
       Caption = #1042#1089#1077
@@ -936,6 +936,7 @@ object Form9: TForm9
     OnDblClick = DBGrid1DblClick
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'number'
         Font.Charset = DEFAULT_CHARSET
@@ -953,6 +954,7 @@ object Form9: TForm9
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'data'
         Font.Charset = DEFAULT_CHARSET
@@ -1024,6 +1026,7 @@ object Form9: TForm9
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'isp'
         Font.Charset = DEFAULT_CHARSET

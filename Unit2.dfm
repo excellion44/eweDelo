@@ -51,9 +51,9 @@ object Form2: TForm2
     DrawingStyle = gdsGradient
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Book Antiqua'
-    Font.Style = []
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
     TabOrder = 0
@@ -66,6 +66,7 @@ object Form2: TForm2
     OnDblClick = DBGrid1DblClick
     Columns = <
       item
+        Alignment = taCenter
         Color = cl3DLight
         Expanded = False
         FieldName = 'number'
@@ -120,6 +121,7 @@ object Form2: TForm2
         Visible = True
       end
       item
+        Alignment = taCenter
         Color = cl3DLight
         Expanded = False
         FieldName = 'ish'
@@ -146,6 +148,7 @@ object Form2: TForm2
         Visible = True
       end
       item
+        Alignment = taCenter
         Color = cl3DLight
         Expanded = False
         FieldName = 'komu'
@@ -159,6 +162,7 @@ object Form2: TForm2
         Visible = True
       end
       item
+        Alignment = taCenter
         Color = cl3DLight
         Expanded = False
         FieldName = 'isp'
@@ -186,6 +190,7 @@ object Form2: TForm2
         Visible = True
       end
       item
+        Alignment = taCenter
         Color = cl3DLight
         Expanded = False
         FieldName = 'ishn'

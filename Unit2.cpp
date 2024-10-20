@@ -8,17 +8,27 @@
 #include "Unit5.h"
 #include <DateUtils.hpp>
 #include <windows.h>
-
+#include "IniFiles.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 #include "ComObj.hpp"
 TForm2 *Form2;
 String WORD_CELL;
+TIniFile *ini = new TIniFile (ExtractFilePath(ParamStr(0))+"EWEsetting.ini");
 //---------------------------------------------------------------------------
 __fastcall TForm2::TForm2(TComponent* Owner)
 	: TForm(Owner)
 {
+}
+//----------------------[Перевод цветов из HEX в RGB]--------------------------------------
+TColor HexToColor(const String& hex)
+{
+    int r = StrToInt("0x" + hex.SubString(2, 2)); // 2 символа после #
+    int g = StrToInt("0x" + hex.SubString(4, 2)); // 2 символа после #
+    int b = StrToInt("0x" + hex.SubString(6, 2)); // 2 символа после #
+
+    return TColor(RGB(r, g, b));
 }
 //---------------------------------------------------------------------------
 
@@ -42,15 +52,16 @@ void __fastcall TForm2::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 				if (i  <= COL_DAY_YEL && ADOQuery1->FieldByName("ispflag")->Value == 1)
 				{
 						TDBGrid *dbg = (TDBGrid*)Sender;
-                        dbg->Canvas->Brush->Color = clYellow;
-                        dbg->Canvas->FillRect(Rect);
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColDayYel","#DDDB53"));
+						dbg->Canvas->FillRect(Rect);
+						dbg->Canvas->Font->Color = clBlack;
                         dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
                 }
 
 				if (i  >= COL_DAY_RED && ADOQuery1->FieldByName("ispflag")->Value == 1)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
-						dbg->Canvas->Brush->Color = clMaroon;
+						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColDayRed","#D94545"));
 						dbg->Canvas->FillRect(Rect);
 						dbg->Canvas->Font->Color = clWhite;
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);

@@ -135,8 +135,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label19: TLabel
-    Left = 1128
-    Top = 16
+    Left = 1080
+    Top = 18
     Width = 37
     Height = 13
     Caption = 'Label19'
@@ -155,7 +155,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label23: TLabel
-    Left = 580
+    Left = 588
     Top = 139
     Width = 50
     Height = 16
@@ -170,9 +170,9 @@ object Form1: TForm1
   object Label24: TLabel
     Left = 656
     Top = 139
-    Width = 103
+    Width = 101
     Height = 16
-    Caption = #1053#1072' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1080':'
+    Caption = #1048#1089#1090#1077#1082#1072#1077#1090' '#1089#1088#1086#1082':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -442,7 +442,7 @@ object Form1: TForm1
       Style = csDropDownList
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clLime
+      Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
