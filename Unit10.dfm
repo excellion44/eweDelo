@@ -131,6 +131,7 @@ object Form10: TForm10
       D750B3D6DE4BE340C70512D9DC5FC18E6E41626262C22C16CBBAAAAA2A9B8E40
       B88F706EFD9CFBC93F407ABBF519909F50B939B82EB2E1540000000049454E44
       AE426082}
+    PopupMenu = PopupMenu1
     OnClick = Image1Click
   end
   object FileName: TLabel
@@ -242,7 +243,7 @@ object Form10: TForm10
     Left = 63
     Top = 32
     Width = 283
-    Height = 23
+    Height = 21
     Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -257,7 +258,7 @@ object Form10: TForm10
     Left = 352
     Top = 32
     Width = 123
-    Height = 23
+    Height = 21
     Date = 44674.000000000000000000
     Time = 0.906391238422656900
     Color = clMenu
@@ -273,7 +274,7 @@ object Form10: TForm10
     Left = 8
     Top = 80
     Width = 746
-    Height = 23
+    Height = 21
     Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -288,7 +289,7 @@ object Form10: TForm10
     Left = 8
     Top = 126
     Width = 746
-    Height = 23
+    Height = 21
     Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -364,7 +365,7 @@ object Form10: TForm10
     Left = 8
     Top = 32
     Width = 49
-    Height = 23
+    Height = 21
     Color = clMenu
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
@@ -379,5 +380,16 @@ object Form10: TForm10
   object OpenDialog1: TOpenDialog
     Left = 712
     Top = 384
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 80
+    Top = 328
+    object N1: TMenuItem
+      Caption = #1054#1090#1082#1088#1099#1090#1100
+    end
+    object N2: TMenuItem
+      Caption = #1059#1076#1072#1083#1080#1090#1100
+      OnClick = N2Click
+    end
   end
 end

@@ -177,3 +177,32 @@ void __fastcall TForm10::FormShow(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm10::N2Click(TObject *Sender)
+{
+
+	if(MessageDlg("Действительно хотите удалить файл?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
+	{
+		Form9->ADOQuery1->SQL->Text = "UPDATE obr SET  file = Null, file_name = 'No_File' WHERE number IN (:id)";
+        Form9->ADOQuery1->Parameters->ParamByName("id")->Value = ID->Caption;
+		Form9->ADOQuery1->ExecSQL();
+
+		FileName->Caption = "No_File";
+
+		if(Form1->Label19->Caption == "ОБЩИЙ")
+		{
+			Form9->ADOQuery1->Active = false;
+			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+			Form9->ADOQuery1->Active = true;
+
+		}
+		else
+		{
+			Form9->ADOQuery1->Active = false;
+			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+			Form9->ADOQuery1->Active = true;
+		}
+	}
+
+}
+//---------------------------------------------------------------------------
+
