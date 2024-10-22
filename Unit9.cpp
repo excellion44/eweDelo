@@ -89,7 +89,7 @@ void __fastcall TForm9::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
 				}
 				//если обращение закрыто
-				if (ADOQuery1->FieldByName("ishn")->Value != "")
+				if (ADOQuery1->FieldByName("flag")->Value == 2)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
 						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColIspTrue","#32E19A"));
