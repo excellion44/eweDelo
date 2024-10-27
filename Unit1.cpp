@@ -200,14 +200,14 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	if(Label19->Caption == "наыхи")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label23->Caption = Form9->ADOQuery1->RecordCount;
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label23->Caption = Form9->ADOQuery1->RecordCount;
 	}
@@ -216,14 +216,14 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	if(Label19->Caption == "наыхи")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label27->Caption = Form9->ADOQuery1->RecordCount;
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label27->Caption = Form9->ADOQuery1->RecordCount;
 	}
@@ -232,14 +232,14 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	if(Label19->Caption == "наыхи")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label25->Caption = Form9->ADOQuery1->RecordCount;
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
         Label25->Caption = Form9->ADOQuery1->RecordCount;
 	}
