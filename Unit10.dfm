@@ -42,7 +42,7 @@ object Form10: TForm10
   end
   object Image1: TImage
     Left = 8
-    Top = 352
+    Top = 353
     Width = 49
     Height = 58
     Cursor = crHandPoint
@@ -391,5 +391,11 @@ object Form10: TForm10
       Caption = #1059#1076#1072#1083#1080#1090#1100
       OnClick = N2Click
     end
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Form9.ADOConnection1
+    Parameters = <>
+    Left = 200
+    Top = 344
   end
 end

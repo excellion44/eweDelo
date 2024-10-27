@@ -12,6 +12,8 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
 #include <Vcl.Menus.hpp>
+#include <Data.DB.hpp>
+#include <Data.Win.ADODB.hpp>
 //---------------------------------------------------------------------------
 class TForm10 : public TForm
 {
@@ -42,6 +44,7 @@ __published:	// IDE-managed Components
 	TPopupMenu *PopupMenu1;
 	TMenuItem *N1;
 	TMenuItem *N2;
+	TADOQuery *ADOQuery1;
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Image1Click(TObject *Sender);

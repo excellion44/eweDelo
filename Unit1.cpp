@@ -469,13 +469,13 @@ void __fastcall TForm1::Label20Click(TObject *Sender)
 	if(Label19->Caption == "наыхи")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 	}
 	else
 	{
         Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 	}
 

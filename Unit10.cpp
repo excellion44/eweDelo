@@ -64,14 +64,23 @@ void __fastcall TForm10::Button1Click(TObject *Sender)
 		}
 
 
-			Form9->ADOQuery1->Active = false;
-			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
-			Form9->ADOQuery1->Active = true;
+			if(Form1->Label19->Caption == "наыхи")
+			{
+				Form9->ADOQuery1->Active = false;
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
+				Form9->ADOQuery1->Active = true;
+			}
+			else
+			{
+				Form9->ADOQuery1->Active = false;
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+				Form9->ADOQuery1->Active = true;
+			}
 
 
 		Form10->Close();
 	}
-    else if(ADD_OR_EDIT->Caption == "EDIT")
+	else if(ADD_OR_EDIT->Caption == "EDIT")
 	{
 
 		if(CheckBox1->Checked == true)
@@ -126,14 +135,13 @@ void __fastcall TForm10::Button1Click(TObject *Sender)
 			if(Form1->Label19->Caption == "наыхи")
 			{
 				Form9->ADOQuery1->Active = false;
-				Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
 				Form9->ADOQuery1->Active = true;
-
 			}
 			else
 			{
 				Form9->ADOQuery1->Active = false;
-				Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 				Form9->ADOQuery1->Active = true;
 			}
 
@@ -160,7 +168,15 @@ void __fastcall TForm10::Image1Click(TObject *Sender)
 	 }
 	 else
 	 {
-		((TBlobField*)Form9->ADOQuery1->FieldByName("file"))->SaveToFile(ExtractFilePath(ParamStr(0))+FileName->Caption);
+			ADOQuery1->Active = false;
+
+			ADOQuery1->SQL->Text = "SELECT file from obr WHERE number IN ("+ID->Caption+")";
+			//ADOQuery1->Parameters->ParamByName("id")->Value = ID->Caption;
+			ADOQuery1->Active = true;
+            //ADOQuery1->ExecSQL();
+
+
+		((TBlobField*)ADOQuery1->FieldByName("file"))->SaveToFile(ExtractFilePath(ParamStr(0))+FileName->Caption);
 			char* OpenFileName;
 			AnsiString  f = FileName->Caption;
 			OpenFileName = f.c_str();
@@ -188,19 +204,18 @@ void __fastcall TForm10::N2Click(TObject *Sender)
 
 		FileName->Caption = "No_File";
 
-		if(Form1->Label19->Caption == "наыхи")
-		{
-			Form9->ADOQuery1->Active = false;
-			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
-			Form9->ADOQuery1->Active = true;
-
-		}
-		else
-		{
-			Form9->ADOQuery1->Active = false;
-			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
-			Form9->ADOQuery1->Active = true;
-		}
+		    if(Form1->Label19->Caption == "наыхи")
+			{
+				Form9->ADOQuery1->Active = false;
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
+				Form9->ADOQuery1->Active = true;
+			}
+			else
+			{
+				Form9->ADOQuery1->Active = false;
+				Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+				Form9->ADOQuery1->Active = true;
+			}
 	}
 
 }
