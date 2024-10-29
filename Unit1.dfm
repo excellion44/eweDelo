@@ -14,6 +14,7 @@ object Form1: TForm1
   Menu = MainMenu1
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -354,6 +355,12 @@ object Form1: TForm1
         Height = 13
         Cursor = crHandPoint
         Caption = #1054#1073#1088#1072#1097#1077#1085#1080#1103
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
         OnClick = Label20Click
       end
     end
@@ -407,7 +414,7 @@ object Form1: TForm1
     Visible = False
   end
   object GroupBox1: TGroupBox
-    Left = 343
+    Left = 287
     Top = 210
     Width = 202
     Height = 109
@@ -452,7 +459,7 @@ object Form1: TForm1
     end
   end
   object GroupBox2: TGroupBox
-    Left = 599
+    Left = 543
     Top = 210
     Width = 202
     Height = 109
@@ -504,7 +511,7 @@ object Form1: TForm1
     Visible = False
   end
   object GroupBox3: TGroupBox
-    Left = 855
+    Left = 799
     Top = 210
     Width = 202
     Height = 109
@@ -544,6 +551,7 @@ object Form1: TForm1
     Top = 64
     object PopupMenu11: TMenuItem
       Caption = #1042#1099#1093#1086#1076
+      OnClick = PopupMenu11Click
     end
   end
   object TrayIcon1: TTrayIcon
@@ -2688,6 +2696,68 @@ object Form1: TForm1
       object N3: TMenuItem
         Caption = #1041#1072#1079#1099
         OnClick = N3Click
+      end
+      object N4: TMenuItem
+        Caption = #1042#1085#1077#1096#1085#1080#1081' '#1074#1080#1076
+        object AquaLightSlate1: TMenuItem
+          Caption = 'Aqua Light Slate'
+          OnClick = AquaLightSlate1Click
+        end
+        object Glow1: TMenuItem
+          Caption = 'Glow'
+          OnClick = Glow1Click
+        end
+        object IcebergClassico1: TMenuItem
+          Caption = 'Iceberg Classico'
+          OnClick = IcebergClassico1Click
+        end
+        object LavenderClassico1: TMenuItem
+          Caption = 'Lavender Classico'
+          OnClick = LavenderClassico1Click
+        end
+        object Sky1: TMenuItem
+          Caption = 'Sky'
+          OnClick = Sky1Click
+        end
+        object SlateClassico1: TMenuItem
+          Caption = 'Slate Classico'
+          OnClick = SlateClassico1Click
+        end
+        object abletDark1: TMenuItem
+          Caption = 'Tablet Dark'
+          OnClick = abletDark1Click
+        end
+        object abletLight1: TMenuItem
+          Caption = 'Tablet Light'
+          OnClick = abletLight1Click
+        end
+        object Amakrits1: TMenuItem
+          Caption = 'Amakrits'
+          OnClick = Amakrits1Click
+        end
+        object AmethystKamri1: TMenuItem
+          Caption = 'Amethyst Kamri'
+          OnClick = AmethystKamri1Click
+        end
+        object AquaGraphite1: TMenuItem
+          Caption = 'Aqua Graphite'
+          OnClick = AquaGraphite1Click
+        end
+        object Auric1: TMenuItem
+          Caption = 'Auric'
+          OnClick = Auric1Click
+        end
+        object CobaltXEMedia1: TMenuItem
+          Caption = 'Cobalt XEMedia'
+          OnClick = CobaltXEMedia1Click
+        end
+        object CyanDusk1: TMenuItem
+          Caption = 'Cyan Dusk'
+          OnClick = CyanDusk1Click
+        end
+        object CyanDusk2: TMenuItem
+          Caption = 'Cyan Dusk'
+        end
       end
       object IT1: TMenuItem
         Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1077' ('#1076#1083#1103' IT)'

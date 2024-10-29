@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.259,=C:\Users\admin\Desktop\Форма в Форме Ред\ewedelo\eweDelo\Unit8.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.827,C:\Users\admin\Desktop\Форма в Форме Ред\Project2.cbproj=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Project2.cbproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.578,=C:\Users\admin\Desktop\Форма в Форме Ред\ewedelo\eweDelo\Unit10.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.cpp=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.925,C:\Users\admin\Desktop\Форма в Форме Ред\Project2PCH1.h=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Project2PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.925,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Project2PCH1.h=C:\Users\admin\Desktop\Форма в Форме Ред\Project2PCH1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.756,=C:\Users\admin\Desktop\Форма в Форме Ред\ewedelo\eweDelo\Unit9.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.dfm=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.h=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.dfm=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.cpp=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.h=C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.578,=C:\Users\admin\Desktop\Форма в Форме Ред\ewedelo\eweDelo\Unit10.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.259,=C:\Users\admin\Desktop\Форма в Форме Ред\ewedelo\eweDelo\Unit8.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\admin\Desktop\Форма в Форме Ред\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.cpp=C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Unit2.h=C:\Users\admin\Desktop\Форма в Форме Ред\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.827,C:\Users\admin\Documents\Embarcadero\Studio\Projects\Project2.cbproj=C:\Users\admin\Desktop\Форма в Форме Ред\Project2.cbproj</Transaction>
   </Transactions>
 </BorlandProject>

@@ -69,6 +69,22 @@ __published:	// IDE-managed Components
 	TLabel *Label26;
 	TLabel *Label27;
 	TMenuItem *IT1;
+	TMenuItem *N4;
+	TMenuItem *AquaLightSlate1;
+	TMenuItem *Glow1;
+	TMenuItem *IcebergClassico1;
+	TMenuItem *LavenderClassico1;
+	TMenuItem *Sky1;
+	TMenuItem *SlateClassico1;
+	TMenuItem *abletDark1;
+	TMenuItem *abletLight1;
+	TMenuItem *Amakrits1;
+	TMenuItem *AmethystKamri1;
+	TMenuItem *AquaGraphite1;
+	TMenuItem *Auric1;
+	TMenuItem *CobaltXEMedia1;
+	TMenuItem *CyanDusk1;
+	TMenuItem *CyanDusk2;
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
@@ -82,6 +98,22 @@ __published:	// IDE-managed Components
 	void __fastcall ComboBox2Change(TObject *Sender);
 	void __fastcall Label20Click(TObject *Sender);
 	void __fastcall IT1Click(TObject *Sender);
+	void __fastcall PopupMenu11Click(TObject *Sender);
+	void __fastcall AquaLightSlate1Click(TObject *Sender);
+	void __fastcall Glow1Click(TObject *Sender);
+	void __fastcall IcebergClassico1Click(TObject *Sender);
+	void __fastcall LavenderClassico1Click(TObject *Sender);
+	void __fastcall Sky1Click(TObject *Sender);
+	void __fastcall SlateClassico1Click(TObject *Sender);
+	void __fastcall abletDark1Click(TObject *Sender);
+	void __fastcall abletLight1Click(TObject *Sender);
+	void __fastcall Amakrits1Click(TObject *Sender);
+	void __fastcall AmethystKamri1Click(TObject *Sender);
+	void __fastcall AquaGraphite1Click(TObject *Sender);
+	void __fastcall Auric1Click(TObject *Sender);
+	void __fastcall CobaltXEMedia1Click(TObject *Sender);
+	void __fastcall CyanDusk1Click(TObject *Sender);
+	void __fastcall FormCreate(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

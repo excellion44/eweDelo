@@ -6,6 +6,7 @@
 #include <Dialogs.hpp>
 #include <Vcl.FileCtrl.hpp>
 #include "IniFiles.hpp"
+#include <Vcl.Themes.hpp>
 #pragma hdrstop
 
 #include "Unit1.h"
@@ -163,6 +164,8 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 
 void __fastcall TForm1::FormShow(TObject *Sender)
 {
+
+
 	ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
 	ChangeDataSourceIsh(ini->ReadString("SETTINGBASE","DefaultDBIsh",""), ini->ReadString("SETTINGBASE","DBIsh",""));
 	ChangeDataSourceObr(ini->ReadString("SETTINGBASE","DefaultDBObr",""), ini->ReadString("SETTINGBASE","DBObrasheniya",""));
@@ -253,7 +256,9 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Label1->Font->Color = HexToColor("#e06214");
 	Label16->Font->Color = HexToColor("#e06214");
 	Label2->Font->Color = HexToColor("#e06214");
-    Label20->Font->Color = HexToColor("#e06214");
+	Label20->Font->Color = HexToColor("#e06214");
+
+
 
 
 	//-------------------- Äëÿ Combobox -------------------------------------
@@ -492,6 +497,117 @@ void __fastcall TForm1::IT1Click(TObject *Sender)
 			AnsiString  f = "EWESetting.ini";
 			OpenFileName = f.c_str();
 			ShellExecuteA(Handle, "open", OpenFileName, NULL, NULL, SW_SHOWNORMAL);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::PopupMenu11Click(TObject *Sender)
+{
+	Application->Terminate();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::AquaLightSlate1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Aqua Light Slate");
+	ini->WriteString("STYLESETTING","DefaultStyle","Aqua Light Slate");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Glow1Click(TObject *Sender)
+{
+	  TStyleManager::SetStyle("Glow");
+	  ini->WriteString("STYLESETTING","DefaultStyle","Glow");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::IcebergClassico1Click(TObject *Sender)
+{
+	   TStyleManager::SetStyle("Iceberg Classico");
+	   ini->WriteString("STYLESETTING","DefaultStyle","Iceberg Classico");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::LavenderClassico1Click(TObject *Sender)
+{
+	  TStyleManager::SetStyle("Lavender Classico");
+	  ini->WriteString("STYLESETTING","DefaultStyle","Lavender Classico");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Sky1Click(TObject *Sender)
+{
+	  TStyleManager::SetStyle("Sky");
+	  ini->WriteString("STYLESETTING","DefaultStyle","Sky");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::SlateClassico1Click(TObject *Sender)
+{
+	  TStyleManager::SetStyle("Slate Classico");
+	  ini->WriteString("STYLESETTING","DefaultStyle","Slate Classico");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::abletDark1Click(TObject *Sender)
+{
+	 TStyleManager::SetStyle("Tablet Dark");
+	 ini->WriteString("STYLESETTING","DefaultStyle","Tablet Dark");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::abletLight1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Tablet Light");
+	ini->WriteString("STYLESETTING","DefaultStyle","Tablet Light");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Amakrits1Click(TObject *Sender)
+{
+	 TStyleManager::SetStyle("Amakrits");
+	 ini->WriteString("STYLESETTING","DefaultStyle","Amakrits");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::AmethystKamri1Click(TObject *Sender)
+{
+	 TStyleManager::SetStyle("Amethyst Kamri");
+	 ini->WriteString("STYLESETTING","DefaultStyle","Amethyst Kamri");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::AquaGraphite1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Aqua Graphite");
+	ini->WriteString("STYLESETTING","DefaultStyle","Aqua Graphite");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Auric1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Auric");
+	ini->WriteString("STYLESETTING","DefaultStyle","Auric");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CobaltXEMedia1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Cobalt XEMedia");
+	ini->WriteString("STYLESETTING","DefaultStyle","Cobalt XEMedia");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CyanDusk1Click(TObject *Sender)
+{
+	TStyleManager::SetStyle("Cyan Dusk");
+	ini->WriteString("STYLESETTING","DefaultStyle","Cyan Dusk");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+	TStyleManager::SetStyle(ini->ReadString("STYLESETTING","DefaultStyle","Window"));
+    
 }
 //---------------------------------------------------------------------------
 
