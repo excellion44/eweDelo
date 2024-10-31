@@ -2759,9 +2759,19 @@ object Form1: TForm1
           Caption = 'Cyan Dusk'
         end
       end
+      object N7: TMenuItem
+        Caption = #1055#1088#1086#1095#1080#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
+        OnClick = N7Click
+      end
       object IT1: TMenuItem
         Caption = #1056#1072#1089#1096#1080#1088#1077#1085#1085#1099#1077' ('#1076#1083#1103' IT)'
         OnClick = IT1Click
+      end
+    end
+    object N5: TMenuItem
+      Caption = '?'
+      object N6: TMenuItem
+        Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
       end
     end
   end

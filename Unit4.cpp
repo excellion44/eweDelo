@@ -6,11 +6,13 @@
 #include "Unit4.h"
 #include "Unit2.h"
 #include <windows.h>
+#include "IniFiles.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 String ADD_OR_EDIT;
 TForm4 *Form4;
+TIniFile *ini = new TIniFile (ExtractFilePath(ParamStr(0))+"EWEsetting.ini");
 //---------------------------------------------------------------------------
 __fastcall TForm4::TForm4(TComponent* Owner)
 	: TForm(Owner)
@@ -285,9 +287,11 @@ void __fastcall TForm4::FileNameClick(TObject *Sender)
 	 }
 	 else
 	 {
-		((TBlobField*)Form2->ADOQuery1->FieldByName("file"))->SaveToFile(ExtractFilePath(ParamStr(0))+FileName->Caption);
+		((TBlobField*)Form2->ADOQuery1->FieldByName("file"))->SaveToFile(ini->ReadString("OTHERSETTING","SaveDownloadFiles","")+"\\"+FileName->Caption);
 			char* OpenFileName;
 			AnsiString  f = FileName->Caption;
+			f = ini->ReadString("OTHERSETTING","SaveDownloadFiles","")+"\\"+f;
+			ShowMessage(f);
 			OpenFileName = f.c_str();
 			ShellExecuteA(Handle, "open", OpenFileName, NULL, NULL, SW_SHOWNORMAL);
 

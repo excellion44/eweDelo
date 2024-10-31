@@ -85,6 +85,9 @@ __published:	// IDE-managed Components
 	TMenuItem *CobaltXEMedia1;
 	TMenuItem *CyanDusk1;
 	TMenuItem *CyanDusk2;
+	TMenuItem *N5;
+	TMenuItem *N6;
+	TMenuItem *N7;
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Label2Click(TObject *Sender);
 	void __fastcall Timer1Timer(TObject *Sender);
@@ -114,6 +117,7 @@ __published:	// IDE-managed Components
 	void __fastcall CobaltXEMedia1Click(TObject *Sender);
 	void __fastcall CyanDusk1Click(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
+	void __fastcall N7Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

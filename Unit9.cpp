@@ -469,3 +469,52 @@ void __fastcall TForm9::RadioButton2Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm9::FormResize(TObject *Sender)
+{
+	// Получаем ширину DBGrid
+    int totalWidth = DBGrid1->Width;
+
+    // Устанавливаем фиксированные ширины для колонок 1, 5, 6 и 7
+    int fixedWidths[] = {50, 100, 0, 0, 0, 100, 100}; // Пример фиксированных ширин для колонок 1, 5, 6 и 7
+    int totalFixedWidth = 0;
+
+    // Вычисляем общую фиксированную ширину
+    for (int i = 0; i < 7; ++i) {
+        totalFixedWidth += fixedWidths[i]; // Суммируем фиксированные ширины
+    }
+
+    // Остаточная ширина, доступная для колонок 2, 3 и 4
+    int availableWidth = totalWidth - totalFixedWidth;
+
+    // Учитываем количество колонок, которые мы хотим изменить
+	int startIndex = 2; // Индекс для колонки 2
+	int endIndex = 4;   // Индекс для колонки 4
+    int columnCount = endIndex - startIndex + 1; // Количество колонок (2, 3 и 4)
+
+    // Минимальная ширина для колонок
+    int minColumnWidth = 50; // Установите минимальную ширину по вашему усмотрению
+    int totalMinWidth = minColumnWidth * columnCount; // Общая минимальная ширина
+
+    // Если доступная ширина меньше минимальной, устанавливаем минимальную ширину
+    if (availableWidth < totalMinWidth) {
+        availableWidth = totalMinWidth;
+    }
+
+    // Вычисляем ширину каждой колонки
+    int columnWidth = availableWidth / columnCount;
+
+    // Устанавливаем ширину только для колонок 2, 3 и 4
+    for (int i = startIndex; i <= endIndex; ++i) {
+        DBGrid1->Columns->Items[i]->Width = columnWidth;
+    }
+
+    // Устанавливаем фиксированные ширины для остальных колонок
+    for (int i = 0; i < 7; ++i) {
+        if (fixedWidths[i] > 0) {
+            DBGrid1->Columns->Items[i]->Width = fixedWidths[i];
+        }
+	}
+
+}
+//---------------------------------------------------------------------------
+

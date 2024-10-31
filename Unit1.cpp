@@ -15,6 +15,7 @@
 #include "Unit6.h"
 #include "Unit8.h"
 #include "Unit9.h"
+#include "Unit11.h"
 #include "ComObj.hpp"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -608,6 +609,12 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 {
 	TStyleManager::SetStyle(ini->ReadString("STYLESETTING","DefaultStyle","Window"));
     
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N7Click(TObject *Sender)
+{
+     Form11->ShowModal();
 }
 //---------------------------------------------------------------------------
 

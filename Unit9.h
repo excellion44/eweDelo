@@ -77,6 +77,7 @@ __published:	// IDE-managed Components
 	void __fastcall RadioButton4Click(TObject *Sender);
 	void __fastcall RadioButton1Click(TObject *Sender);
 	void __fastcall RadioButton2Click(TObject *Sender);
+	void __fastcall FormResize(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);

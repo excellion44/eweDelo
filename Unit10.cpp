@@ -176,9 +176,10 @@ void __fastcall TForm10::Image1Click(TObject *Sender)
             //ADOQuery1->ExecSQL();
 
 
-		((TBlobField*)ADOQuery1->FieldByName("file"))->SaveToFile(ExtractFilePath(ParamStr(0))+FileName->Caption);
+		((TBlobField*)ADOQuery1->FieldByName("file"))->SaveToFile(ini->ReadString("OTHERSETTING","SaveDownloadFiles","")+"\\"+FileName->Caption);
 			char* OpenFileName;
 			AnsiString  f = FileName->Caption;
+			f = ini->ReadString("OTHERSETTING","SaveDownloadFiles","")+"\\"+f;
 			OpenFileName = f.c_str();
 			ShellExecuteA(Handle, "open", OpenFileName, NULL, NULL, SW_SHOWNORMAL);
 
