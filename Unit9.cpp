@@ -7,6 +7,10 @@
 #include "Unit10.h"
 #include "Unit1.h"
 #include "IniFiles.hpp"
+
+#include <IdSSL.hpp>
+#include <IdSSLOpenSSL.hpp>
+#include <IdURI.hpp>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -28,11 +32,58 @@ TColor HexToColor(const String& hex)
 }
 //---------------------------------------------------------------------------
 
+void SendTelegramMessage(const String &Token, const String &ChatID, const String &MessageText)
+{
+    TIdHTTP *IdHTTP = new TIdHTTP(nullptr);
+    TIdSSLIOHandlerSocketOpenSSL *SSLHandler = new TIdSSLIOHandlerSocketOpenSSL(nullptr);
+    String URL;
+    String Response;
+
+    try
+    {
+        // Установите версии SSL
+        SSLHandler->SSLOptions->Method = sslvSSLv23; // Это также может быть sslvTLSv1_2 для явного указания
+		//SSLHandler->SSLOptions->VerifyMode = sslvrfNone; // Если не хотите проверять сертификат
+        IdHTTP->IOHandler = SSLHandler;
+
+        // Формируем URL для отправки сообщения
+        URL = Format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s",
+                     ARRAYOFCONST((Token, ChatID, TIdURI::ParamsEncode(MessageText))));
+
+        // Выполняем GET запрос
+        Response = IdHTTP->Get(URL);
+
+        // Опционально: выводим ответ
+        //ShowMessage(Response);
+    }
+    __finally
+    {
+        delete SSLHandler;
+        delete IdHTTP;
+    }
+}
+//---------------------------------------------------------------------------
+String GetEnding(int number, String singular, String plural, String genitive)
+{
+    int lastDigit = number % 10;
+    int lastTwoDigits = number % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+        return plural; // Для чисел 11-19 используется форма множественного числа
+    } else if (lastDigit == 1) {
+        return singular; // Для чисел, оканчивающихся на 1
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        return genitive; // Для чисел, оканчивающихся на 2-4
+    } else {
+        return plural; // Для остальных
+    }
+}
+//---------------------------------------------------------------------------
 void __fastcall TForm9::BitBtn1Click(TObject *Sender)
 {
 	Form10->ADD_OR_EDIT->Caption = "ADD";
-    Form10->date->Date = Date();
-	Form10->ISP->Items->LoadFromFile("ipsobrlist.ewe");
+	Form10->date->Date = Date();
+	Form10->ISP->Items->LoadFromFile(ExtractFilePath(ParamStr(0))+"ipsobrlist.ewe");
 	Form10->FIO->Clear();
 	Form10->ISP->Text = "";
 	Form10->ADRES->Clear();
@@ -112,7 +163,7 @@ void __fastcall TForm9::BitBtn2Click(TObject *Sender)
 	Form10->number->Text = ADOQuery1->FieldByName("number")->Value;
 	Form10->FIO->Text = ADOQuery1->FieldByName("fio")->Value;
 	Form10->date->Date = ADOQuery1->FieldByName("data")->Value;
-	Form10->ISP->Items->LoadFromFile("ipsobrlist.ewe");
+	Form10->ISP->Items->LoadFromFile(ExtractFilePath(ParamStr(0))+"ipsobrlist.ewe");
 	Form10->ISP->Text = ADOQuery1->FieldByName("isp")->Value;
 	Form10->ADRES->Text = ADOQuery1->FieldByName("adres")->Value;
 	Form10->TEMA->Text = ADOQuery1->FieldByName("tema")->Value;
@@ -272,7 +323,7 @@ void __fastcall TForm9::Edit5KeyUp(TObject *Sender, WORD &Key, TShiftState Shift
 
 void __fastcall TForm9::BitBtn3Click(TObject *Sender)
 {
-    if(MessageDlg("Действительно хотите удалить запись?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
+	if(MessageDlg("Действительно хотите удалить запись?", mtConfirmation, TMsgDlgButtons() << mbYes << mbNo, 0) == mrYes)
 	{
 		String DELETED = ADOQuery1->FieldByName("number")->Value;
 
@@ -282,13 +333,13 @@ void __fastcall TForm9::BitBtn3Click(TObject *Sender)
 		if(Form1->Label19->Caption == "ОБЩИЙ")
 		{
 			Form9->ADOQuery1->Active = false;
-			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
+			Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
 			Form9->ADOQuery1->Active = true;
 		}
 		else
 		{
 			Form9->ADOQuery1->Active = false;
-			Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+			Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 			Form9->ADOQuery1->Active = true;
 		}
 
@@ -423,13 +474,13 @@ void __fastcall TForm9::RadioButton4Click(TObject *Sender)
 	if(Form1->Label19->Caption == "ОБЩИЙ")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr ORDER BY number";
-		Form9->ADOQuery1->Active = true;
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
+			Form9->ADOQuery1->Active = true;
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 	}
 }
@@ -472,7 +523,7 @@ void __fastcall TForm9::RadioButton2Click(TObject *Sender)
 void __fastcall TForm9::FormResize(TObject *Sender)
 {
 	// Получаем ширину DBGrid
-    int totalWidth = DBGrid1->Width;
+    int totalWidth = DBGrid1->Width-40;
 
     // Устанавливаем фиксированные ширины для колонок 1, 5, 6 и 7
     int fixedWidths[] = {50, 100, 0, 0, 0, 100, 100}; // Пример фиксированных ширин для колонок 1, 5, 6 и 7
@@ -515,6 +566,58 @@ void __fastcall TForm9::FormResize(TObject *Sender)
         }
 	}
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button3Click(TObject *Sender)
+{
+	String message;
+	String prosrocheno;
+	String istekaet;
+
+	if(Form1->Label19->Caption == "ОБЩИЙ")
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+		 message = "ВНИМАНИЕ! У вас имеется "+IntToStr(ADOQuery1->RecordCount)+" просроченых обращения! ГЛАВА ВСЕ ВИДИТ =) ";
+		//ShowMessage(message);
+
+
+	}
+	else
+	{
+		Form9->ADOQuery1->Active = false;
+		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->Active = true;
+	}
+
+
+
+
+
+
+
+
+	SendTelegramMessage("1877723958:AAHh1nURo4sssu-JQ0Y4idsgZy3L-WaIz9Y", "1663304412", message);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::Button4Click(TObject *Sender)
+{
+	int number;
+
+    // Пробуем преобразовать текст из Edit1 в число
+	if (TryStrToInt("24", number))
+	{
+		String ending = GetEnding(number, "обращение", "обращений", "обращения");
+		ShowMessage("У вас есть " + IntToStr(number) + " " + ending.c_str() + ".");
+	}
+	else
+	{
+        // Если введено не число, выводим сообщение об ошибке
+		ShowMessage("Введите корректное число.");
+	}
 }
 //---------------------------------------------------------------------------
 

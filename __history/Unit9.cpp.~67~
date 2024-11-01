@@ -89,7 +89,7 @@ void __fastcall TForm9::DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect
 						dbg->DefaultDrawColumnCell(Rect, DataCol, Column, State);
 				}
 				//если обращение закрыто
-				if (ADOQuery1->FieldByName("ishn")->Value != "")
+				if (ADOQuery1->FieldByName("flag")->Value == 2)
                 {
 						TDBGrid *dbg = (TDBGrid*)Sender;
 						dbg->Canvas->Brush->Color = HexToColor(ini->ReadString("COLORSETTING","Form9ColIspTrue","#32E19A"));
@@ -371,8 +371,19 @@ void __fastcall TForm9::BitBtn5Click(TObject *Sender)
 	ISHN->Clear();
     FilePatch->Caption = "FilePatch";
 	ID->Caption = ADOQuery1->FieldByName("number")->Value;
-    Panel2->Color = HexToColor(ini->ReadString("COLORSETTING","Panel2ColIsp","#32E19A"));
-    Panel2->Visible = true;
+    Form9->Panel2->Color = HexToColor(ini->ReadString("COLORSETTING","Panel2ColIsp","#DDDB53"));
+    // Устанавливаем Panel1 видимым
+	 Panel2->Visible = true;
+
+    // Вычисляем размеры и позиции для центрирования
+	int panelWidth = Panel2->Width;
+	int panelHeight = Panel2->Height;
+
+	// Центрирование по X
+	Panel2->Left = (ClientWidth - panelWidth) / 2;
+
+    // Центрирование по Y
+	Panel2->Top = (ClientHeight - panelHeight) / 2;
 }
 //---------------------------------------------------------------------------
 
@@ -455,6 +466,55 @@ void __fastcall TForm9::RadioButton2Click(TObject *Sender)
 		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE flag =1 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm9::FormResize(TObject *Sender)
+{
+	// Получаем ширину DBGrid
+    int totalWidth = DBGrid1->Width;
+
+    // Устанавливаем фиксированные ширины для колонок 1, 5, 6 и 7
+    int fixedWidths[] = {50, 100, 0, 0, 0, 100, 100}; // Пример фиксированных ширин для колонок 1, 5, 6 и 7
+    int totalFixedWidth = 0;
+
+    // Вычисляем общую фиксированную ширину
+    for (int i = 0; i < 7; ++i) {
+        totalFixedWidth += fixedWidths[i]; // Суммируем фиксированные ширины
+    }
+
+    // Остаточная ширина, доступная для колонок 2, 3 и 4
+    int availableWidth = totalWidth - totalFixedWidth;
+
+    // Учитываем количество колонок, которые мы хотим изменить
+	int startIndex = 2; // Индекс для колонки 2
+	int endIndex = 4;   // Индекс для колонки 4
+    int columnCount = endIndex - startIndex + 1; // Количество колонок (2, 3 и 4)
+
+    // Минимальная ширина для колонок
+    int minColumnWidth = 50; // Установите минимальную ширину по вашему усмотрению
+    int totalMinWidth = minColumnWidth * columnCount; // Общая минимальная ширина
+
+    // Если доступная ширина меньше минимальной, устанавливаем минимальную ширину
+    if (availableWidth < totalMinWidth) {
+        availableWidth = totalMinWidth;
+    }
+
+    // Вычисляем ширину каждой колонки
+    int columnWidth = availableWidth / columnCount;
+
+    // Устанавливаем ширину только для колонок 2, 3 и 4
+    for (int i = startIndex; i <= endIndex; ++i) {
+        DBGrid1->Columns->Items[i]->Width = columnWidth;
+    }
+
+    // Устанавливаем фиксированные ширины для остальных колонок
+    for (int i = 0; i < 7; ++i) {
+        if (fixedWidths[i] > 0) {
+            DBGrid1->Columns->Items[i]->Width = fixedWidths[i];
+        }
+	}
+
 }
 //---------------------------------------------------------------------------
 

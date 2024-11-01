@@ -11,6 +11,7 @@ object Form9: TForm9
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -22,8 +23,6 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 17
     object Label1: TLabel
       Left = 638
       Top = 7
@@ -855,28 +854,81 @@ object Form9: TForm9
     end
     object RadioButton1: TRadioButton
       Left = 328
-      Top = 14
+      Top = 22
       Width = 113
       Height = 17
       Caption = #1055#1088#1086#1089#1088#1086#1095#1077#1085#1086
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 9
+      OnClick = RadioButton1Click
     end
     object RadioButton2: TRadioButton
       Left = 328
-      Top = 37
+      Top = 41
       Width = 113
       Height = 17
       Caption = #1044#1072#1085' '#1087#1088#1086#1084'. '#1086#1090#1074#1077#1090
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 10
+      OnClick = RadioButton2Click
     end
     object RadioButton3: TRadioButton
       Left = 328
-      Top = 60
+      Top = 61
       Width = 113
       Height = 17
       Caption = #1048#1089#1090#1077#1082#1072#1077#1090' '#1089#1088#1086#1082
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 11
       OnClick = RadioButton3Click
+    end
+    object RadioButton4: TRadioButton
+      Left = 328
+      Top = 2
+      Width = 113
+      Height = 17
+      Caption = #1042#1089#1077
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 12
+      OnClick = RadioButton4Click
+    end
+    object Button3: TButton
+      Left = 937
+      Top = 57
+      Width = 75
+      Height = 25
+      Caption = 'Button3'
+      TabOrder = 13
+      OnClick = Button3Click
+    end
+    object Button4: TButton
+      Left = 937
+      Top = 26
+      Width = 75
+      Height = 25
+      Caption = 'Button4'
+      TabOrder = 14
+      OnClick = Button4Click
     end
   end
   object DBGrid1: TDBGrid
@@ -903,6 +955,7 @@ object Form9: TForm9
     OnDblClick = DBGrid1DblClick
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'number'
         Font.Charset = DEFAULT_CHARSET
@@ -920,6 +973,7 @@ object Form9: TForm9
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'data'
         Font.Charset = DEFAULT_CHARSET
@@ -991,6 +1045,7 @@ object Form9: TForm9
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'isp'
         Font.Charset = DEFAULT_CHARSET
@@ -1229,6 +1284,8 @@ object Form9: TForm9
     Top = 176
     Width = 337
     Height = 209
+    Color = clMoneyGreen
+    ParentBackground = False
     TabOrder = 3
     Visible = False
     object Image1: TImage
@@ -1396,6 +1453,7 @@ object Form9: TForm9
       Height = 25
       Caption = #1054#1090#1084#1077#1085#1072
       TabOrder = 1
+      OnClick = Button2Click
     end
     object ISHN: TEdit
       Left = 24

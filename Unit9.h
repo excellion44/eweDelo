@@ -16,6 +16,11 @@
 #include <Vcl.Menus.hpp>
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.Imaging.pngimage.hpp>
+#include <IdBaseComponent.hpp>
+#include <IdComponent.hpp>
+#include <IdHTTP.hpp>
+#include <IdTCPClient.hpp>
+#include <IdTCPConnection.hpp>
 //---------------------------------------------------------------------------
 class TForm9 : public TForm
 {
@@ -55,6 +60,8 @@ __published:	// IDE-managed Components
 	TRadioButton *RadioButton2;
 	TRadioButton *RadioButton3;
 	TRadioButton *RadioButton4;
+	TButton *Button3;
+	TButton *Button4;
 	void __fastcall BitBtn1Click(TObject *Sender);
 	void __fastcall DBGrid1DrawColumnCell(TObject *Sender, const TRect &Rect, int DataCol,
           TColumn *Column, TGridDrawState State);
@@ -78,6 +85,8 @@ __published:	// IDE-managed Components
 	void __fastcall RadioButton1Click(TObject *Sender);
 	void __fastcall RadioButton2Click(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
+	void __fastcall Button3Click(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm9(TComponent* Owner);

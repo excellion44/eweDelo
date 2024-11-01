@@ -23,6 +23,8 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = -8
+    ExplicitTop = 8
     object Label1: TLabel
       Left = 638
       Top = 7
@@ -911,6 +913,26 @@ object Form9: TForm9
       ParentFont = False
       TabOrder = 12
       OnClick = RadioButton4Click
+    end
+    object Button3: TButton
+      Left = 937
+      Top = 57
+      Width = 75
+      Height = 25
+      Caption = 'Button3'
+      TabOrder = 13
+      Visible = False
+      OnClick = Button3Click
+    end
+    object Button4: TButton
+      Left = 937
+      Top = 26
+      Width = 75
+      Height = 25
+      Caption = 'Button4'
+      TabOrder = 14
+      Visible = False
+      OnClick = Button4Click
     end
   end
   object DBGrid1: TDBGrid
