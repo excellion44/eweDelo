@@ -28,55 +28,55 @@ TColor HexToColor(const String& hex)
     int g = StrToInt("0x" + hex.SubString(4, 2)); // 2 символа после #
     int b = StrToInt("0x" + hex.SubString(6, 2)); // 2 символа после #
 
-    return TColor(RGB(r, g, b));
+	return TColor(RGB(r, g, b));
 }
 //---------------------------------------------------------------------------
 
 void SendTelegramMessage(const String &Token, const String &ChatID, const String &MessageText)
 {
-    TIdHTTP *IdHTTP = new TIdHTTP(nullptr);
-    TIdSSLIOHandlerSocketOpenSSL *SSLHandler = new TIdSSLIOHandlerSocketOpenSSL(nullptr);
-    String URL;
+	TIdHTTP *IdHTTP = new TIdHTTP(nullptr);
+	TIdSSLIOHandlerSocketOpenSSL *SSLHandler = new TIdSSLIOHandlerSocketOpenSSL(nullptr);
+	String URL;
     String Response;
 
     try
     {
         // Установите версии SSL
-        SSLHandler->SSLOptions->Method = sslvSSLv23; // Это также может быть sslvTLSv1_2 для явного указания
+		SSLHandler->SSLOptions->Method = sslvSSLv23; // Это также может быть sslvTLSv1_2 для явного указания
 		//SSLHandler->SSLOptions->VerifyMode = sslvrfNone; // Если не хотите проверять сертификат
         IdHTTP->IOHandler = SSLHandler;
 
         // Формируем URL для отправки сообщения
         URL = Format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s",
-                     ARRAYOFCONST((Token, ChatID, TIdURI::ParamsEncode(MessageText))));
+					 ARRAYOFCONST((Token, ChatID, TIdURI::ParamsEncode(MessageText))));
 
-        // Выполняем GET запрос
-        Response = IdHTTP->Get(URL);
+		// Выполняем GET запрос
+		Response = IdHTTP->Get(URL);
 
-        // Опционально: выводим ответ
-        //ShowMessage(Response);
-    }
-    __finally
-    {
-        delete SSLHandler;
-        delete IdHTTP;
-    }
+		// Опционально: выводим ответ
+		//ShowMessage(Response);
+	}
+	__finally
+	{
+		delete SSLHandler;
+		delete IdHTTP;
+	}
 }
 //---------------------------------------------------------------------------
 String GetEnding(int number, String singular, String plural, String genitive)
 {
-    int lastDigit = number % 10;
-    int lastTwoDigits = number % 100;
+	int lastDigit = number % 10;
+	int lastTwoDigits = number % 100;
 
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-        return plural; // Для чисел 11-19 используется форма множественного числа
-    } else if (lastDigit == 1) {
-        return singular; // Для чисел, оканчивающихся на 1
-    } else if (lastDigit >= 2 && lastDigit <= 4) {
-        return genitive; // Для чисел, оканчивающихся на 2-4
-    } else {
-        return plural; // Для остальных
-    }
+	if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+		return plural; // Для чисел 11-19 используется форма множественного числа
+	} else if (lastDigit == 1) {
+		return singular; // Для чисел, оканчивающихся на 1
+	} else if (lastDigit >= 2 && lastDigit <= 4) {
+		return genitive; // Для чисел, оканчивающихся на 2-4
+	} else {
+		return plural; // Для остальных
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm9::BitBtn1Click(TObject *Sender)
@@ -580,9 +580,13 @@ void __fastcall TForm9::Button3Click(TObject *Sender)
 		Form9->ADOQuery1->Active = false;
 		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
 		Form9->ADOQuery1->Active = true;
-		 message = "ВНИМАНИЕ! У вас имеется "+IntToStr(ADOQuery1->RecordCount)+" просроченых обращения! ГЛАВА ВСЕ ВИДИТ =) ";
-		//ShowMessage(message);
 
+		 message = "ВНИМАНИЕ! У вас имеется: ";
+
+
+		String ending = GetEnding(Form9->ADOQuery1->RecordCount, "обращение", "обращений", "обращения");
+		message = message + IntToStr(Form9->ADOQuery1->RecordCount) + " просроченных " + ending;
+		ShowMessage(message);
 
 	}
 	else
@@ -590,6 +594,13 @@ void __fastcall TForm9::Button3Click(TObject *Sender)
 		Form9->ADOQuery1->Active = false;
 		Form9->ADOQuery1->SQL->Text = "SELECT * FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Form1->Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
+
+		 message = "ВНИМАНИЕ! У вас имеется: ";
+
+
+		String ending = GetEnding(Form9->ADOQuery1->RecordCount, "обращение", "обращений", "обращения");
+		message = message + IntToStr(Form9->ADOQuery1->RecordCount) + " просроченных " + ending;
+		ShowMessage(message);
 	}
 
 
@@ -599,7 +610,7 @@ void __fastcall TForm9::Button3Click(TObject *Sender)
 
 
 
-	SendTelegramMessage("1877723958:AAHh1nURo4sssu-JQ0Y4idsgZy3L-WaIz9Y", "1663304412", message);
+	//SendTelegramMessage("BOT_TOKEN", "1663304412", message);
 }
 //---------------------------------------------------------------------------
 

@@ -23,8 +23,6 @@ object Form9: TForm9
     Color = cl3DLight
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitTop = 8
     object Label1: TLabel
       Left = 638
       Top = 7

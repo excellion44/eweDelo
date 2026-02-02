@@ -39,5 +39,15 @@ void __fastcall TForm11::Button1Click(TObject *Sender)
 void __fastcall TForm11::FormShow(TObject *Sender)
 {
 	Edit1->Text = ini->ReadString("OTHERSETTING","SaveDownloadFiles","");
+	CheckBox1->Checked = ini->ReadBool("TELEGRAMMSETTING","SendMessage",false);
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm11::CheckBox1Click(TObject *Sender)
+{
+	if(CheckBox1->Checked == true)
+		ini->WriteBool("TELEGRAMMSETTING","SendMessage", true);
+	else
+        ini->WriteBool("TELEGRAMMSETTING","SendMessage", false);
+}
+//---------------------------------------------------------------------------
+

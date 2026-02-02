@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+п»ї//---------------------------------------------------------------------------
 
 #include <vcl.h>
 #include <DateUtils.hpp>
@@ -8,6 +8,9 @@
 #include "IniFiles.hpp"
 #include <Vcl.Themes.hpp>
 #pragma hdrstop
+#include <IdSSL.hpp>
+#include <IdSSLOpenSSL.hpp>
+#include <IdURI.hpp>
 
 #include "Unit1.h"
 #include "Unit2.h"
@@ -30,35 +33,144 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
 }
-//----------------------[Перевод цветов из HEX в RGB]--------------------------------------
+//----------------------[РџРµСЂРµРІРѕРґ С†РІРµС‚РѕРІ РёР· HEX РІ RGB]--------------------------------------
 TColor HexToColor(const String& hex)
 {
-    int r = StrToInt("0x" + hex.SubString(2, 2)); // 2 символа после #
-    int g = StrToInt("0x" + hex.SubString(4, 2)); // 2 символа после #
-    int b = StrToInt("0x" + hex.SubString(6, 2)); // 2 символа после #
+    int r = StrToInt("0x" + hex.SubString(2, 2)); // 2 СЃРёРјРІРѕР»Р° РїРѕСЃР»Рµ #
+    int g = StrToInt("0x" + hex.SubString(4, 2)); // 2 СЃРёРјРІРѕР»Р° РїРѕСЃР»Рµ #
+    int b = StrToInt("0x" + hex.SubString(6, 2)); // 2 СЃРёРјРІРѕР»Р° РїРѕСЃР»Рµ #
 
     return TColor(RGB(r, g, b));
+}
+//---------------------------------------------------------------------------
+void SaveUsersListToIni(const String userTG[], const String userTGID[], int count)
+{
+
+    try
+    {
+        String usersList = "";
+        String usersListId = "";
+
+        for (int i = 0; i < count; ++i)
+        {
+            // Р¤РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєРё РґР»СЏ Р·Р°РїРёСЃРё
+            usersList += userTG[i] + (i < count - 1 ? ", " : ""); // Р”РѕР±Р°РІР»СЏРµРј Р·Р°РїСЏС‚СѓСЋ, РµСЃР»Рё СЌС‚Рѕ РЅРµ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
+            usersListId += userTGID[i] + (i < count - 1 ? ", " : ""); // РўРѕ Р¶Рµ РґР»СЏ ID
+        }
+
+        // Р—Р°РїРёСЃС‹РІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РІ СЃРµРєС†РёСЋ [TELEGRAMMSETTING]
+		ini->WriteString("TELEGRAMMSETTING", "UsersList", usersList);
+		ini->WriteString("TELEGRAMMSETTING", "UsersListId", usersListId);
+    }
+    __finally
+    {
+
+    }
+}
+//---------------------------------------------------------------------------
+void LoadUsersListFromIni(String userTG[], String userTGID[], int &count)
+{
+
+	count = 0; // РЎР±СЂР°СЃС‹РІР°РµРј СЃС‡РµС‚С‡РёРє
+    try
+    {
+        // Р§РёС‚Р°РµРј РґР°РЅРЅС‹Рµ РёР· СЃРµРєС†РёРё [TELEGRAMMSETTING]
+		String usersList = ini->ReadString("TELEGRAMMSETTING", "UsersList", "");
+        String usersListId = ini->ReadString("TELEGRAMMSETTING", "UsersListId", "");
+
+        // Р Р°Р·РґРµР»СЏРµРј СЃС‚СЂРѕРєСѓ РЅР° РјР°СЃСЃРёРІС‹
+        TStringList *users = new TStringList();
+        TStringList *ids = new TStringList();
+
+        users->Delimiter = ',';
+        users->DelimitedText = usersList;
+
+        ids->Delimiter = ',';
+        ids->DelimitedText = usersListId;
+
+        count = users->Count; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+
+        for (int i = 0; i < count; ++i)
+        {
+            userTG[i] = Trim(users->Strings[i]);
+            userTGID[i] = Trim(ids->Strings[i]);
+        }
+
+        delete users;
+        delete ids;
+    }
+    __finally
+    {
+
+    }
+}
+
+void SendTelegramMessage(const String &Token, const String &ChatID, const String &MessageText)
+{
+	TIdHTTP *IdHTTP = new TIdHTTP(nullptr);
+	TIdSSLIOHandlerSocketOpenSSL *SSLHandler = new TIdSSLIOHandlerSocketOpenSSL(nullptr);
+	String URL;
+    String Response;
+
+    try
+    {
+        // РЈСЃС‚Р°РЅРѕРІРёС‚Рµ РІРµСЂСЃРёРё SSL
+		SSLHandler->SSLOptions->Method = sslvSSLv23; // Р­С‚Рѕ С‚Р°РєР¶Рµ РјРѕР¶РµС‚ Р±С‹С‚СЊ sslvTLSv1_2 РґР»СЏ СЏРІРЅРѕРіРѕ СѓРєР°Р·Р°РЅРёСЏ
+		//SSLHandler->SSLOptions->VerifyMode = sslvrfNone; // Р•СЃР»Рё РЅРµ С…РѕС‚РёС‚Рµ РїСЂРѕРІРµСЂСЏС‚СЊ СЃРµСЂС‚РёС„РёРєР°С‚
+        IdHTTP->IOHandler = SSLHandler;
+
+        // Р¤РѕСЂРјРёСЂСѓРµРј URL РґР»СЏ РѕС‚РїСЂР°РІРєРё СЃРѕРѕР±С‰РµРЅРёСЏ
+        URL = Format("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s",
+					 ARRAYOFCONST((Token, ChatID, TIdURI::ParamsEncode(MessageText))));
+
+		// Р’С‹РїРѕР»РЅСЏРµРј GET Р·Р°РїСЂРѕСЃ
+		Response = IdHTTP->Get(URL);
+
+		// РћРїС†РёРѕРЅР°Р»СЊРЅРѕ: РІС‹РІРѕРґРёРј РѕС‚РІРµС‚
+		//ShowMessage(Response);
+	}
+	__finally
+	{
+		delete SSLHandler;
+		delete IdHTTP;
+	}
+}
+//---------------------------------------------------------------------------
+String GetEnding(int number, String singular, String plural, String genitive)
+{
+	int lastDigit = number % 10;
+	int lastTwoDigits = number % 100;
+
+	if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+		return plural; // Р”Р»СЏ С‡РёСЃРµР» 11-19 РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С„РѕСЂРјР° РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРіРѕ С‡РёСЃР»Р°
+	} else if (lastDigit == 1) {
+		return singular; // Р”Р»СЏ С‡РёСЃРµР», РѕРєР°РЅС‡РёРІР°СЋС‰РёС…СЃСЏ РЅР° 1
+	} else if (lastDigit >= 2 && lastDigit <= 4) {
+		return genitive; // Р”Р»СЏ С‡РёСЃРµР», РѕРєР°РЅС‡РёРІР°СЋС‰РёС…СЃСЏ РЅР° 2-4
+	} else {
+		return plural; // Р”Р»СЏ РѕСЃС‚Р°Р»СЊРЅС‹С…
+	}
 }
 //---------------------------------------------------------------------------
 void ChangeDataSource(String DBName, String DBpath)
 {
 	 Form2->ADOConnection1->Close();
 
-	// Сохраняем текущую строку подключения
+	// РЎРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
 	String currentConnectionString = Form2->ADOConnection1->ConnectionString;
 
-	// Новый источник данных
+	// РќРѕРІС‹Р№ РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С…
 	String newDataSource = DBpath + "\\" + DBName;
 
 	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
 
 
-	// Собираем строку подключения обратно
+	// РЎРѕР±РёСЂР°РµРј СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕ
 	Form2->ADOConnection1->ConnectionString = newConnectionString;
 	Form1->Edit1->Text = newConnectionString;
 
 
-	// Вы можете открыть соединение, если это необходимо
+	// Р’С‹ РјРѕР¶РµС‚Рµ РѕС‚РєСЂС‹С‚СЊ СЃРѕРµРґРёРЅРµРЅРёРµ, РµСЃР»Рё СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ
 	 Form2->ADOConnection1->Open();
 }
 //---------------------------------------------------------------------------
@@ -66,10 +178,10 @@ void ChangeDataSourceIsh(String DBName, String DBpath)
 {
 	 Form6->ADOConnection1->Close();
 
-	// Сохраняем текущую строку подключения
+	// РЎРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
 	String currentConnectionString = Form6->ADOConnection1->ConnectionString;
 
-	// Новый источник данных
+	// РќРѕРІС‹Р№ РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С…
 	String newDataSource = DBpath + "\\" + DBName;
 
 
@@ -77,12 +189,12 @@ void ChangeDataSourceIsh(String DBName, String DBpath)
 	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
 
 
-	// Собираем строку подключения обратно
+	// РЎРѕР±РёСЂР°РµРј СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕ
 	Form6->ADOConnection1->ConnectionString = newConnectionString;
 	Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
 
 
-	// Вы можете открыть соединение, если это необходимо
+	// Р’С‹ РјРѕР¶РµС‚Рµ РѕС‚РєСЂС‹С‚СЊ СЃРѕРµРґРёРЅРµРЅРёРµ, РµСЃР»Рё СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ
 	 Form6->ADOConnection1->Open();
 	  //Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
 }
@@ -91,10 +203,10 @@ void ChangeDataSourceObr(String DBName, String DBpath)
 {
 	 Form9->ADOConnection1->Close();
 
-	// Сохраняем текущую строку подключения
+	// РЎРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
 	String currentConnectionString = Form9->ADOConnection1->ConnectionString;
 
-	// Новый источник данных
+	// РќРѕРІС‹Р№ РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С…
 	String newDataSource = DBpath + "\\" + DBName;
 
 
@@ -102,12 +214,12 @@ void ChangeDataSourceObr(String DBName, String DBpath)
 	String newConnectionString = currentConnectionString.SubString(1, 59)  + newDataSource + ";" + currentConnectionString.SubString(currentConnectionString.Pos("Mode="), currentConnectionString.Length());
 
 
-	// Собираем строку подключения обратно
+	// РЎРѕР±РёСЂР°РµРј СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РѕР±СЂР°С‚РЅРѕ
 	Form9->ADOConnection1->ConnectionString = newConnectionString;
 	//Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
 
 
-	// Вы можете открыть соединение, если это необходимо
+	// Р’С‹ РјРѕР¶РµС‚Рµ РѕС‚РєСЂС‹С‚СЊ СЃРѕРµРґРёРЅРµРЅРёРµ, РµСЃР»Рё СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ
 	 Form9->ADOConnection1->Open();
 	  //Form1->Edit3->Text = Form6->ADOConnection1->ConnectionString;
 }
@@ -170,12 +282,12 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	ChangeDataSource(ini->ReadString("SETTINGBASE","DefaultDB",""), ini->ReadString("SETTINGBASE","DBVhod",""));
 	ChangeDataSourceIsh(ini->ReadString("SETTINGBASE","DefaultDBIsh",""), ini->ReadString("SETTINGBASE","DBIsh",""));
 	ChangeDataSourceObr(ini->ReadString("SETTINGBASE","DefaultDBObr",""), ini->ReadString("SETTINGBASE","DBObrasheniya",""));
-    //------------------Проверка авторизации---------------------------------
+    //------------------РџСЂРѕРІРµСЂРєР° Р°РІС‚РѕСЂРёР·Р°С†РёРё---------------------------------
 	Label19->Caption  = ini->ReadString("SETTINGUSER","User","not-authorized");
 
 	if(Label19->Caption == "not-authorized" || Label19->Caption == "" )
 	{
-		ShowMessage("Проверьте настройки, вы не авторизованы");
+		ShowMessage("РџСЂРѕРІРµСЂСЊС‚Рµ РЅР°СЃС‚СЂРѕР№РєРё, РІС‹ РЅРµ Р°РІС‚РѕСЂРёР·РѕРІР°РЅС‹");
         Application->Terminate();
 	}
     //-------------------------------------------------------------------------
@@ -200,8 +312,8 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 	Form2->ADOQuery1->Active = true;
 	Label11->Caption = Form2->ADOQuery1->RecordCount;
 
-    //Все обращения
-	if(Label19->Caption == "ОБЩИЙ")
+    //Р’СЃРµ РѕР±СЂР°С‰РµРЅРёСЏ
+	if(Label19->Caption == "РћР‘Р©РР™")
 	{
 		Form9->ADOQuery1->Active = false;
 		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
@@ -216,34 +328,94 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 		Label23->Caption = Form9->ADOQuery1->RecordCount;
 	}
 
-	//Истек срок
-	if(Label19->Caption == "ОБЩИЙ")
+	//РСЃС‚РµРє СЃСЂРѕРє
+	if(Label19->Caption == "РћР‘Р©РР™")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label27->Caption = Form9->ADOQuery1->RecordCount;
+
+		//---------------- РѕС‚РїСЂР°РІРєР° СѓРІРµРґРѕРјР»РµРЅРёР№ РІ РўР“----------------------
+
+		if(ini->ReadBool("TELEGRAMMSETTING","SendMessage",false) == true)
+		{
+			String userTG[10];
+			String userTGID[10];
+			int countTgUsers;
+			LoadUsersListFromIni(userTG, userTGID, countTgUsers);
+
+			if(ini->ReadDate("TELEGRAMMSETTING","LastDateSendMessage",Now()) < Date())
+			{
+
+					for (int i = 0; i < countTgUsers; ++i)
+					{
+						  String message;
+						  String ending;
+						  String ending1;
+
+						  Form9->ADOQuery1->Active = false;
+						  Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+userTG[i]+"' ORDER BY number";
+						  Form9->ADOQuery1->Active = true;
+
+						  String prosrochka = Form9->ADOQuery1->RecordCount;
+
+						  Form9->ADOQuery1->Active = false;
+						  Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+userTG[i]+"' ORDER BY number";
+						  Form9->ADOQuery1->Active = true;
+
+
+						  String istekaet = Form9->ADOQuery1->RecordCount;
+
+						  if(StrToInt(prosrochka) > 0)
+						  {
+							   String ending = GetEnding(StrToInt(prosrochka), "РѕР±СЂР°С‰РµРЅРёРµ", "РѕР±СЂР°С‰РµРЅРёР№", "РѕР±СЂР°С‰РµРЅРёСЏ");
+							   ending1 = GetEnding(StrToInt(prosrochka), "РїСЂРѕСЃСЂРѕС‡РµРЅРЅРѕРµ", "РїСЂРѕСЃСЂРѕС‡РµРЅРЅС‹С…", "РїСЂРѕСЃСЂРѕС‡РµРЅРЅС‹С…");
+
+							   message = userTG[i]+" Р’РќРРњРђРќРР•! РЈ РІР°СЃ РёРјРµРµС‚СЃСЏ: "+ prosrochka + " "+ ending1 + " " + ending + " СЃСЂРѕС‡РЅРѕ СЃРІСЏР¶РёС‚РµСЃСЊ СЃ РѕР±С‰РёРј РѕС‚РґРµР»РѕРј.";
+							   SendTelegramMessage(ini->ReadString("TELEGRAMMSETTING","BotToken",""), userTGID[i], message);
+
+						  }
+
+						  if(StrToInt(istekaet) > 0)
+						  {
+								message = message + " РСЃС‚РµРєР°РµС‚ СЃСЂРѕРє  " + istekaet +" "+ GetEnding(StrToInt(istekaet), "РѕР±СЂР°С‰РµРЅРёРµ", "РѕР±СЂР°С‰РµРЅРёР№", "РѕР±СЂР°С‰РµРЅРёСЏ");
+								SendTelegramMessage(ini->ReadString("TELEGRAMMSETTING","BotToken",""), userTGID[i], message);
+						  }
+
+
+
+
+
+					}
+
+				ini->WriteDate("TELEGRAMMSETTING","LastDateSendMessage",Now());
+			}
+		}
+
+
+
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label27->Caption = Form9->ADOQuery1->RecordCount;
 	}
 
-	//Истекает срок
-	if(Label19->Caption == "ОБЩИЙ")
+	//РСЃС‚РµРєР°РµС‚ СЃСЂРѕРє
+	if(Label19->Caption == "РћР‘Р©РР™")
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 ORDER BY number";
 		Form9->ADOQuery1->Active = true;
 		Label25->Caption = Form9->ADOQuery1->RecordCount;
 	}
 	else
 	{
 		Form9->ADOQuery1->Active = false;
-		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
+		Form9->ADOQuery1->SQL->Text = "SELECT number FROM obr WHERE data < DATEADD('d', -15, Date()) AND data >= DATEADD('d', -25, Date()) AND flag = 0 AND isp ='"+Label19->Caption+"' ORDER BY number";
 		Form9->ADOQuery1->Active = true;
         Label25->Caption = Form9->ADOQuery1->RecordCount;
 	}
@@ -262,7 +434,7 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 
 
 
-	//-------------------- Для Combobox -------------------------------------
+	//-------------------- Р”Р»СЏ Combobox -------------------------------------
 	//ComboBox1->Font->Color = HexToColor("#8c00ff");
    //	ComboBox2->Font->Color = HexToColor("#8c00ff");
 
@@ -281,24 +453,24 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			String searchPath;
 			int result;
 
-			// Очистка ComboBox перед добавлением новых элементов
+			// РћС‡РёСЃС‚РєР° ComboBox РїРµСЂРµРґ РґРѕР±Р°РІР»РµРЅРёРµРј РЅРѕРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 			ComboBox1->Clear();
 
-			// Переменные для поиска файлов
+			// РџРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РїРѕРёСЃРєР° С„Р°Р№Р»РѕРІ
 			TSearchRec searchRec;
-			 searchPath = ini->ReadString("SETTINGBASE","DBVhod","") +"\\*.mdb"; // Путь к файлам
+			 searchPath = ini->ReadString("SETTINGBASE","DBVhod","") +"\\*.mdb"; // РџСѓС‚СЊ Рє С„Р°Р№Р»Р°Рј
 
-			// Запуск поиска файлов
+			// Р—Р°РїСѓСЃРє РїРѕРёСЃРєР° С„Р°Р№Р»РѕРІ
 			 result = FindFirst(searchPath, faArchive, searchRec);
 
-			// Проверяем, найдены ли файлы
-			if (result == 0) // Если файлы найдены
+			// РџСЂРѕРІРµСЂСЏРµРј, РЅР°Р№РґРµРЅС‹ Р»Рё С„Р°Р№Р»С‹
+			if (result == 0) // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅР°Р№РґРµРЅС‹
 			{
 				do {
-					// Добавляем имя файла (без пути) в ComboBox
+					// Р”РѕР±Р°РІР»СЏРµРј РёРјСЏ С„Р°Р№Р»Р° (Р±РµР· РїСѓС‚Рё) РІ ComboBox
 					ComboBox1->Items->Add(searchRec.Name);
 
-					// Переходим к следующему файлу
+					// РџРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ С„Р°Р№Р»Сѓ
 					result = FindNext(searchRec);
 				} while (result == 0);
 
@@ -307,72 +479,72 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 				ComboBox1->ItemIndex = ComboBox1->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDB","2024.mdb"));
 
 			}
-			else // Если файлы не найдены
+			else // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅРµ РЅР°Р№РґРµРЅС‹
 			{
-				ShowMessage("Файлы с расширением .mdb не найдены Входящие ");
+				ShowMessage("Р¤Р°Р№Р»С‹ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .mdb РЅРµ РЅР°Р№РґРµРЅС‹ Р’С…РѕРґСЏС‰РёРµ ");
 			}
 
-			// Освобождаем ресурсы
+			// РћСЃРІРѕР±РѕР¶РґР°РµРј СЂРµСЃСѓСЂСЃС‹
 			FindClose(searchRec);
-			//---------------------ИСХОДЯЩИЕ--------------------------
+			//---------------------РРЎРҐРћР”РЇР©РР•--------------------------
 
-            // Очистка ComboBox перед добавлением новых элементов
+            // РћС‡РёСЃС‚РєР° ComboBox РїРµСЂРµРґ РґРѕР±Р°РІР»РµРЅРёРµРј РЅРѕРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 			ComboBox2->Clear();
 
-			 searchPath = ini->ReadString("SETTINGBASE","DBIsh","") +"\\*.mdb"; // Путь к файлам
+			 searchPath = ini->ReadString("SETTINGBASE","DBIsh","") +"\\*.mdb"; // РџСѓС‚СЊ Рє С„Р°Р№Р»Р°Рј
 
-			// Запуск поиска файлов
+			// Р—Р°РїСѓСЃРє РїРѕРёСЃРєР° С„Р°Р№Р»РѕРІ
 			 result = FindFirst(searchPath, faArchive, searchRec);
 
-			// Проверяем, найдены ли файлы
-			if (result == 0) // Если файлы найдены
+			// РџСЂРѕРІРµСЂСЏРµРј, РЅР°Р№РґРµРЅС‹ Р»Рё С„Р°Р№Р»С‹
+			if (result == 0) // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅР°Р№РґРµРЅС‹
 			{
 				do {
-					// Добавляем имя файла (без пути) в ComboBox
+					// Р”РѕР±Р°РІР»СЏРµРј РёРјСЏ С„Р°Р№Р»Р° (Р±РµР· РїСѓС‚Рё) РІ ComboBox
 					ComboBox2->Items->Add(searchRec.Name);
 
-					// Переходим к следующему файлу
+					// РџРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ С„Р°Р№Р»Сѓ
 					result = FindNext(searchRec);
 				} while (result == 0);
 
 			ComboBox2->ItemIndex = ComboBox2->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDBIsh","2024.mdb"));
 			}
-			else // Если файлы не найдены
+			else // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅРµ РЅР°Р№РґРµРЅС‹
 			{
-				ShowMessage("Файлы с расширением .mdb не найдены Исходящие ");
+				ShowMessage("Р¤Р°Р№Р»С‹ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .mdb РЅРµ РЅР°Р№РґРµРЅС‹ РСЃС…РѕРґСЏС‰РёРµ ");
 			}
 
-			// Освобождаем ресурсы
+			// РћСЃРІРѕР±РѕР¶РґР°РµРј СЂРµСЃСѓСЂСЃС‹
 			FindClose(searchRec);
-			//---------------------Обращения--------------------------
+			//---------------------РћР±СЂР°С‰РµРЅРёСЏ--------------------------
 
-            // Очистка ComboBox перед добавлением новых элементов
+            // РћС‡РёСЃС‚РєР° ComboBox РїРµСЂРµРґ РґРѕР±Р°РІР»РµРЅРёРµРј РЅРѕРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 			ComboBox3->Clear();
 
-			 searchPath = ini->ReadString("SETTINGBASE","DBObrasheniya","") +"\\*.mdb"; // Путь к файлам
+			 searchPath = ini->ReadString("SETTINGBASE","DBObrasheniya","") +"\\*.mdb"; // РџСѓС‚СЊ Рє С„Р°Р№Р»Р°Рј
 
-			// Запуск поиска файлов
+			// Р—Р°РїСѓСЃРє РїРѕРёСЃРєР° С„Р°Р№Р»РѕРІ
 			 result = FindFirst(searchPath, faArchive, searchRec);
 
-			// Проверяем, найдены ли файлы
-			if (result == 0) // Если файлы найдены
+			// РџСЂРѕРІРµСЂСЏРµРј, РЅР°Р№РґРµРЅС‹ Р»Рё С„Р°Р№Р»С‹
+			if (result == 0) // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅР°Р№РґРµРЅС‹
 			{
 				do {
-					// Добавляем имя файла (без пути) в ComboBox
+					// Р”РѕР±Р°РІР»СЏРµРј РёРјСЏ С„Р°Р№Р»Р° (Р±РµР· РїСѓС‚Рё) РІ ComboBox
 					ComboBox3->Items->Add(searchRec.Name);
 
-					// Переходим к следующему файлу
+					// РџРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ С„Р°Р№Р»Сѓ
 					result = FindNext(searchRec);
 				} while (result == 0);
 
 			ComboBox3->ItemIndex = ComboBox3->Items->IndexOf(ini->ReadString("SETTINGBASE","DefaultDBObr","2024.mdb"));
 			}
-			else // Если файлы не найдены
+			else // Р•СЃР»Рё С„Р°Р№Р»С‹ РЅРµ РЅР°Р№РґРµРЅС‹
 			{
-				ShowMessage("Файлы с расширением .mdb не найдены Обращения ");
+				ShowMessage("Р¤Р°Р№Р»С‹ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .mdb РЅРµ РЅР°Р№РґРµРЅС‹ РћР±СЂР°С‰РµРЅРёСЏ ");
 			}
 
-			// Освобождаем ресурсы
+			// РћСЃРІРѕР±РѕР¶РґР°РµРј СЂРµСЃСѓСЂСЃС‹
 			FindClose(searchRec);
 
 
@@ -390,19 +562,19 @@ void __fastcall TForm1::Label16Click(TObject *Sender)
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
    TFileOpenDialog *Dialog = new TFileOpenDialog(this);
-	Dialog->Title = "Выберите каталог";
-	Dialog->Options << fdoPickFolders; // Устанавливаем опцию выбора папок
-	Dialog->DefaultFolder = "Desktop"; // Устанавливаем начальную папку
+	Dialog->Title = "Р’С‹Р±РµСЂРёС‚Рµ РєР°С‚Р°Р»РѕРі";
+	Dialog->Options << fdoPickFolders; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РѕРїС†РёСЋ РІС‹Р±РѕСЂР° РїР°РїРѕРє
+	Dialog->DefaultFolder = "Desktop"; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РЅР°С‡Р°Р»СЊРЅСѓСЋ РїР°РїРєСѓ
 
-	// Показываем диалог выбора
+	// РџРѕРєР°Р·С‹РІР°РµРј РґРёР°Р»РѕРі РІС‹Р±РѕСЂР°
 	if (Dialog->Execute())
 	{
-		// Получаем выбранный каталог
+		// РџРѕР»СѓС‡Р°РµРј РІС‹Р±СЂР°РЅРЅС‹Р№ РєР°С‚Р°Р»РѕРі
 		selectedDir = Dialog->FileName;
-		ShowMessage("Выбранный каталог: " + selectedDir);
+		ShowMessage("Р’С‹Р±СЂР°РЅРЅС‹Р№ РєР°С‚Р°Р»РѕРі: " + selectedDir);
 	}
 
-	delete Dialog; // Освобождаем память
+	delete Dialog; // РћСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ
 }
 //---------------------------------------------------------------------------
 
@@ -472,7 +644,7 @@ void __fastcall TForm1::Label20Click(TObject *Sender)
 	Form9->DBGrid1->BorderStyle = bsNone;
 	ChangeDataSourceObr(ComboBox3->Text, ini->ReadString("SETTINGBASE","DBObrasheniya",""));
 
-	if(Label19->Caption == "ОБЩИЙ")
+	if(Label19->Caption == "РћР‘Р©РР™")
 	{
 		Form9->ADOQuery1->Active = false;
 		Form9->ADOQuery1->SQL->Text = "SELECT number, data, fio, adres, tema, isp, ishn, flag, primechanie, file_name FROM obr ORDER BY number";
@@ -617,4 +789,6 @@ void __fastcall TForm1::N7Click(TObject *Sender)
      Form11->ShowModal();
 }
 //---------------------------------------------------------------------------
+
+
 
